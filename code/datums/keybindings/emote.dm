@@ -3,7 +3,7 @@
 	var/datum/emote/linked_emote
 
 /datum/keybinding/emote/can_use(client/C, mob/M)
-	return ..() //We don't need custom logic here as emotes handle their own useability, see USABLE_DEAD_EMOTES
+	return ..() //We don't need custom logic here as emotes handle their own useability
 
 /datum/keybinding/emote/down(client/user)
 	. = ..()

@@ -8,18 +8,6 @@
 		return FALSE
 	return !isnull(C.holder) && ..()
 
-/datum/keybinding/admin/mc_debug
-	name = "MC Debug"
-	keys = list("F3")
-	rights = R_VIEWRUNTIMES | R_DEBUG
-
-/datum/keybinding/admin/mc_debug/down(client/C)
-	. = ..()
-	if(C in SSdebugview.processing)
-		SSdebugview.stop_processing(C)
-		return
-	SSdebugview.start_processing(C)
-
 /datum/keybinding/admin/msay
 	name = "Msay"
 	keys = list("F4")
