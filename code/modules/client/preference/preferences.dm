@@ -230,9 +230,6 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	b_type = pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 	parent?.set_macros()
 	max_gear_slots = config.max_loadout_points
-	if(!SSdbcore.IsConnected())
-		init_keybindings() //we want default keybinds, even if DB is not connected
-		//return
 	var/loaded_preferences_successfully = FALSE
 	if(istype(C))
 		if(!IsGuestKey(C.key))
@@ -247,6 +244,9 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	//we couldn't load character data so just randomize the character appearance + name
 	random_character()		//let's create a random character then - rather than a fat, bald and naked man.
 	real_name = random_name(gender)
+	if(!SSdbcore.IsConnected())
+		init_keybindings() //we want default keybinds, even if DB is not connected
+		return
 	if(istype(C))
 		if(!loaded_preferences_successfully)
 			save_preferences(C) // Do not call this with no client/C, it generates a runtime / SQL error
