@@ -18,7 +18,7 @@
 	C.ooc()
 
 /datum/keybinding/client/looc
-	name = "Local OOC"
+	name = "Локальный OOC"
 	keys = list("L")
 
 /datum/keybinding/client/looc/down(client/C)
@@ -41,8 +41,16 @@
 	. = ..()
 	C.mob.me_wrapper()
 
+/datum/keybinding/client/t_fullscreen
+	name = "Переключить Fullscreen"
+	keys = list("F11")
+
+/datum/keybinding/client/t_fullscreen/down(client/C)
+	. = ..()
+	C.toggle_fullscreen()
+
 /datum/keybinding/client/toggle_min_hud
-	name = "Toggle Minimal HUD"
+	name = "Переключить минимальный HUD"
 	keys = list("F12")
 
 /datum/keybinding/client/toggle_min_hud/down(client/C)

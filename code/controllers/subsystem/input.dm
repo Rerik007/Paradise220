@@ -19,10 +19,6 @@ SUBSYSTEM_DEF(input)
 	refresh_client_macro_sets()
 	return ..()
 
-// This is for when macro sets are eventualy datumized
-/datum/controller/subsystem/input/get_stat_details()
-	return "P: [length(processing)]"
-
 /datum/controller/subsystem/input/fire(resumed = FALSE)
 	var/list/to_cull
 	for(var/client/C in processing)

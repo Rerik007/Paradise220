@@ -232,7 +232,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 	max_gear_slots = config.max_loadout_points
 	if(!SSdbcore.IsConnected())
 		init_keybindings() //we want default keybinds, even if DB is not connected
-		return
+		//return
 	var/loaded_preferences_successfully = FALSE
 	if(istype(C))
 		if(!IsGuestKey(C.key))
@@ -601,12 +601,12 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			dat += "<a href='?_src_=prefs;preference=keybindings;all=reset'>Reset to Default</a>&nbsp;"
 			dat += "<a href='?_src_=prefs;preference=keybindings;all=clear'>Clear</a><br /></div>"
 			dat += "<tr><td colspan=4><hr></td></tr>"
-			dat += "<tr><td colspan=4><div align='center'><b>Please note, some keybinds are overriden by other categories.</b></div></td></tr>"
-			dat += "<tr><td colspan=4><div align='center'><b>Ensure you bind all of them, or the specific one you want.</b></div></td></tr>"
+			dat += "<tr><td colspan=4><div align='center'><b>Пожалуйста, обратите внимание, что некоторые привязки клавиш переопределяются другими категориями.</b></div></td></tr>"
+			dat += "<tr><td colspan=4><div align='center'><b>Убедитесь, что вы привязали их все или тот конкретный, который вам нужен.</b></div></td></tr>"
 			dat += "<tr><td colspan=4><hr></td></tr>"
-			dat += "<tr><td colspan=4><div align='center'><b>Users of legacy mode can only rebind and use the following keys:</b></div></td></tr>"
-			dat += "<tr><td colspan=4><div align='center'><b>Arrow Keys, Function Keys, Insert, Del, Home, End, PageUp, PageDn.</b></div></td></tr>"
-
+			dat += "<tr><td colspan=4><div align='center'><b>Пользователи старого режима могут только повторно привязать и использовать следующие ключи:</b></div></td></tr>"
+			dat += "<tr><td colspan=4><div align='center'><b>Стрелки, Функциональные (буквы и т.п.), Insert, Del, Home, End, PageUp, PageDn.</b></div></td></tr>"
+			dat += "<tr><td colspan=4><div align='center'><b>Привязка клавиш поддерживается только на английской раскладке, но будет работать и на другой.</b></div></td></tr>"
 			dat += "<table align='center' width='100%'>"
 
 			// Lookup lists to make our life easier
@@ -852,7 +852,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 			LAZYADD(keybindings[key], kb)
 
 	parent?.update_active_keybindings()
-		return keybindings
+	return keybindings
 
 /datum/preferences/proc/capture_keybinding(mob/user, datum/keybinding/KB, old)
 	var/HTML = {"
@@ -2309,7 +2309,7 @@ GLOBAL_LIST_INIT(special_role_times, list( //minimum age (in days) for accounts 
 
 								if(new_key == "Unidentified") //There doesn't seem to be any any key!
 									capture_keybinding(user, KB, href_list["old"])
-								return
+									return
 
 								if(!(length_char(new_key) == 1 && text2ascii(new_key) >= 0x80)) // Don't uppercase unicode stuff
 									new_key = uppertext(new_key)

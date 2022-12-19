@@ -1,189 +1,137 @@
 /datum/keybinding/emote
 	category = KB_CATEGORY_EMOTE_GENERIC
-	var/datum/emote/linked_emote
+	var/linked_emote
 
 /datum/keybinding/emote/can_use(client/C, mob/M)
 	return ..() //We don't need custom logic here as emotes handle their own useability
 
 /datum/keybinding/emote/down(client/user)
 	. = ..()
-	user.mob.emote(initial(linked_emote.key), intentional = TRUE)
+	usr.user_triggered_emote(linked_emote)
 
 /datum/keybinding/emote/flip
-	linked_emote = /datum/emote/flip
-	name = "Flip"
-
-/datum/keybinding/emote/spin
-	linked_emote = /datum/emote/spin
-	name = "Spin"
+	linked_emote = "flip"
+	name = "Кувырок"
 
 /datum/keybinding/emote/blush
-	linked_emote = /datum/emote/living/blush
-	name = "Blush"
+	linked_emote = "blush"
+	name = "Краснеть"
 
 /datum/keybinding/emote/bow
-	linked_emote = /datum/emote/living/bow
-	name = "Bow"
+	linked_emote ="bow"
+	name = "Поклониться"
 
 /datum/keybinding/emote/burp
-	linked_emote = /datum/emote/living/burp
-	name = "Burp"
+	linked_emote ="burp"
+	name = "Рыгнуть"
 
 /datum/keybinding/emote/choke
-	linked_emote = /datum/emote/living/choke
-	name = "Choke"
+	linked_emote ="choke"
+	name = "Подавиться"
 
 /datum/keybinding/emote/collapse
-	linked_emote = /datum/emote/living/collapse
-	name = "Collapse"
+	linked_emote ="collapse"
+	name = "Рухнуть"
 
 /datum/keybinding/emote/dance
-	linked_emote = /datum/emote/living/dance
-	name = "Dance"
+	linked_emote ="dance"
+	name = "Танцевать"
 
 /datum/keybinding/emote/jump
-	linked_emote = /datum/emote/living/jump
-	name = "Jump"
+	linked_emote ="jump"
+	name = "Прыгать"
 
-/datum/keybinding/emote/deathgasp
-	linked_emote = /datum/emote/living/deathgasp
+/*/datum/keybinding/emote/deathgasp
+	linked_emote ="deathgasp"
 	name = "Deathgasp"
-
+*/
 /datum/keybinding/emote/drool
-	linked_emote = /datum/emote/living/drool
-	name = "Drool"
+	linked_emote ="drool"
+	name = "Нести чепуху"
 
 /datum/keybinding/emote/quiver
-	linked_emote = /datum/emote/living/quiver
-	name = "Quiver"
+	linked_emote ="quiver"
+	name = "Трепетать"
 
 /datum/keybinding/emote/frown
-	linked_emote = /datum/emote/living/frown
-	name = "Frown"
-
-/datum/keybinding/emote/gag
-	linked_emote = /datum/emote/living/gag
-	name = "Gag"
+	linked_emote ="frown"
+	name = "Хмуриться"
 
 /datum/keybinding/emote/glare
-	linked_emote = /datum/emote/living/glare
-	name = "Glare"
+	linked_emote ="glare"
+	name = "Недовольно смотреть"
 
 /datum/keybinding/emote/grin
-	linked_emote = /datum/emote/living/grin
-	name = "Grin"
-
-/datum/keybinding/emote/grimace
-	linked_emote = /datum/emote/living/grimace
-	name = "Grimace"
+	linked_emote ="grin"
+	name = "Оскалиться в улыбке"
 
 /datum/keybinding/emote/groan
-	linked_emote = /datum/emote/living/groan
-	name = "Groan"
+	linked_emote ="groan"
+	name = "Болезненно вздохнуть"
 
 /datum/keybinding/emote/look
-	linked_emote = /datum/emote/living/look
-	name = "Look"
+	linked_emote ="look"
+	name = "Смотреть"
 
 /datum/keybinding/emote/bshake
-	linked_emote = /datum/emote/living/bshake
-	name = "Shake"
+	linked_emote ="bshake"
+	name = "Трястись"
 
 /datum/keybinding/emote/shudder
-	linked_emote = /datum/emote/living/shudder
-	name = "Shudder"
+	linked_emote ="shudder"
+	name = "Содрогаться"
 
 /datum/keybinding/emote/point
-	linked_emote = /datum/emote/living/point
-	name = "Point"
-
-/datum/keybinding/emote/pout
-	linked_emote = /datum/emote/living/pout
-	name = "Pout"
+	linked_emote ="point"
+	name = "Указать пальцем"
 
 /datum/keybinding/emote/scream
-	linked_emote = /datum/emote/living/scream
-	name = "Scream"
+	linked_emote ="scream"
+	name = "Кричать"
 
 /datum/keybinding/emote/shake
-	linked_emote = /datum/emote/living/shake
-	name = "Head Shake"
+	linked_emote ="shake"
+	name = "Трясти головой"
 
 /datum/keybinding/emote/shiver
-	linked_emote = /datum/emote/living/shiver
-	name = "Shiver"
+	linked_emote ="shiver"
+	name = "Дрожать"
 
 /datum/keybinding/emote/sigh
-	linked_emote = /datum/emote/living/sigh
-	name = "Sigh"
-
-/datum/keybinding/emote/happy
-	linked_emote = /datum/emote/living/sigh/happy
-	name = "Sigh (Happy)"
-
-/datum/keybinding/emote/sit
-	linked_emote = /datum/emote/living/sit
-	name = "Sit"
+	linked_emote ="sigh"
+	name = "Вздыхать"
 
 /datum/keybinding/emote/smile
-	linked_emote = /datum/emote/living/smile
-	name = "Smile"
-
-/datum/keybinding/emote/smug
-	linked_emote = /datum/emote/living/smug
-	name = "Smug"
+	linked_emote ="smile"
+	name = "Улыбнуться"
 
 /datum/keybinding/emote/sniff
-	linked_emote = /datum/emote/living/sniff
-	name = "Sniff"
+	linked_emote ="sniff"
+	name = "Нюхать"
 
 /datum/keybinding/emote/snore
-	linked_emote = /datum/emote/living/snore
-	name = "Snore"
+	linked_emote ="snore"
+	name = "Храпеть"
 
 /datum/keybinding/emote/stare
-	linked_emote = /datum/emote/living/stare
-	name = "Stare"
-
-/datum/keybinding/emote/stretch
-	linked_emote = /datum/emote/living/strech
-	name = "Stretch"
-
-/datum/keybinding/emote/sulk
-	linked_emote = /datum/emote/living/sulk
-	name = "Sulk"
-
-/datum/keybinding/emote/sway
-	linked_emote = /datum/emote/living/sway
-	name = "Sway"
-
-/datum/keybinding/emote/swear
-	linked_emote = /datum/emote/living/swear
-	name = "Swear"
-
-/datum/keybinding/emote/tilt
-	linked_emote = /datum/emote/living/tilt
-	name = "Tilt"
+	linked_emote ="stare"
+	name = "Пялиться"
 
 /datum/keybinding/emote/tremble
-	linked_emote = /datum/emote/living/tremble
-	name = "Tremble"
+	linked_emote ="tremble"
+	name = "Дрожать в ужасе"
 
 /datum/keybinding/emote/twitch
-	linked_emote = /datum/emote/living/twitch
-	name = "Twitch (Violent)"
+	linked_emote ="twitch"
+	name = "Дёргаться (сильно)"
 
 /datum/keybinding/emote/twitch_s
-	linked_emote = /datum/emote/living/twitch_s
-	name = "Twitch"
+	linked_emote ="twitch_s"
+	name = "Дёргаться"
 
 /datum/keybinding/emote/whimper
-	linked_emote = /datum/emote/living/whimper
-	name = "Whimper"
-
-/datum/keybinding/emote/wsmile
-	linked_emote = /datum/emote/living/wsmile
-	name = "Smile (Weak)"
+	linked_emote ="whimper"
+	name = "Подмигнуть"
 
 /datum/keybinding/emote/carbon
 	category = KB_CATEGORY_EMOTE_CARBON
@@ -192,76 +140,48 @@
 	return iscarbon(M) && ..()
 
 /datum/keybinding/emote/carbon/blink
-	linked_emote = /datum/emote/living/carbon/blink
-	name = "Blink"
+	linked_emote ="blink"
+	name = "Моргать"
 
 /datum/keybinding/emote/carbon/blink_r
-	linked_emote = /datum/emote/living/carbon/blink_r
-	name = "Blink (Rapid)"
+	linked_emote ="blink_r"
+	name = "Моргать (быстро)"
 
 /datum/keybinding/emote/carbon/clap
-	linked_emote = /datum/emote/living/carbon/clap
-	name = "Clap"
-
-/datum/keybinding/emote/carbon/cross
-	linked_emote = /datum/emote/living/carbon/cross
-	name = "Cross Arms"
+	linked_emote ="clap"
+	name = "Хлопать"
 
 /datum/keybinding/emote/carbon/chuckle
-	linked_emote = /datum/emote/living/carbon/chuckle
-	name = "Chuckle"
+	linked_emote ="chuckle"
+	name = "Усмехнуться"
 
 /datum/keybinding/emote/carbon/cough
-	linked_emote = /datum/emote/living/carbon/cough
-	name = "Cough"
+	linked_emote ="cough"
+	name = "Кашлять"
 
 /datum/keybinding/emote/carbon/moan
-	linked_emote = /datum/emote/living/carbon/moan
-	name = "Moan"
+	linked_emote ="moan"
+	name = "Стонать"
 
 /datum/keybinding/emote/carbon/giggle
-	linked_emote = /datum/emote/living/carbon/giggle
-	name = "Giggle"
-
-/datum/keybinding/emote/carbon/gurgle
-	linked_emote = /datum/emote/living/carbon/gurgle
-	name = "Gurgle"
-
-/datum/keybinding/emote/carbon/inhale
-	linked_emote = /datum/emote/living/carbon/inhale
-	name = "Inhale"
-
-/datum/keybinding/emote/carbon/inhale/sharp
-	linked_emote = /datum/emote/living/carbon/inhale/sharp
-	name = "Inhale (Sharp)"
-
-/datum/keybinding/emote/carbon/kiss
-	linked_emote = /datum/emote/living/carbon/kiss
-	name = "Kiss" //PG13
+	linked_emote ="giggle"
+	name = "Хихикать"
 
 /datum/keybinding/emote/carbon/wave
-	linked_emote = /datum/emote/living/carbon/wave
-	name = "Wave"
+	linked_emote ="wave"
+	name = "Махать"
 
 /datum/keybinding/emote/carbon/yawn
-	linked_emote = /datum/emote/living/carbon/yawn
-	name = "Yawn"
-
-/datum/keybinding/emote/carbon/exhale
-	linked_emote = /datum/emote/living/carbon/exhale
-	name = "Exhale"
+	linked_emote ="yawn"
+	name = "Зевать"
 
 /datum/keybinding/emote/carbon/laugh
-	linked_emote = /datum/emote/living/carbon/laugh
-	name = "Laugh"
-
-/datum/keybinding/emote/carbon/scowl
-	linked_emote = /datum/emote/living/carbon/scowl
-	name = "Scowl"
+	linked_emote ="laugh"
+	name = "Смеяться"
 
 /datum/keybinding/emote/carbon/faint
-	linked_emote = /datum/emote/living/carbon/faint
-	name = "Faint"
+	linked_emote ="faint"
+	name = "Потерять сознание"
 
 /datum/keybinding/emote/carbon/alien
 	category = KB_CATEGORY_EMOTE_ALIEN
@@ -270,49 +190,38 @@
 	return isalien(M) && ..()
 
 /datum/keybinding/emote/carbon/alien/humanoid/roar
-	linked_emote = /datum/emote/living/carbon/alien/humanoid/roar
-	name = "Roar"
+	linked_emote ="roar"
+	name = "Рычать"
 
 /datum/keybinding/emote/carbon/alien/humanoid/hiss
-	linked_emote = /datum/emote/living/carbon/alien/humanoid/hiss
-	name = "Hiss"
+	linked_emote ="hiss"
+	name = "Шипеть"
 
-/datum/keybinding/emote/carbon/alien/humanoid/gnarl
-	linked_emote = /datum/emote/living/carbon/alien/humanoid/gnarl
-	name = "Gnarl"
-
+//For MMI's brains
 /datum/keybinding/emote/carbon/brain
 	category = KB_CATEGORY_EMOTE_BRAIN
 
 /datum/keybinding/emote/carbon/brain/can_use(client/C, mob/M)
 	return isbrain(M) && ..()
 
-/datum/keybinding/emote/carbon/brain/alarm
-	linked_emote = /datum/emote/living/carbon/brain/alarm
-	name = "Alarm"
-
-/datum/keybinding/emote/carbon/brain/alert
-	linked_emote = /datum/emote/living/carbon/brain/alert
-	name = "Alert"
-
 /datum/keybinding/emote/carbon/brain/notice
-	linked_emote = /datum/emote/living/carbon/brain/notice
+	linked_emote ="notice"
 	name = "Notice"
 
 /datum/keybinding/emote/carbon/brain/flash
-	linked_emote = /datum/emote/living/carbon/brain/flash
+	linked_emote ="flash"
 	name = "Flash"
 
 /datum/keybinding/emote/carbon/brain/whistle
-	linked_emote = /datum/emote/living/carbon/brain/whistle
+	linked_emote ="whistle"
 	name = "Whistle"
 
 /datum/keybinding/emote/carbon/brain/beep
-	linked_emote = /datum/emote/living/carbon/brain/beep
+	linked_emote ="beep"
 	name = "Beep"
 
 /datum/keybinding/emote/carbon/brain/boop
-	linked_emote = /datum/emote/living/carbon/brain/boop
+	linked_emote ="boop"
 	name = "Boop"
 
 /datum/keybinding/emote/carbon/human
@@ -322,196 +231,168 @@
 	return ishuman(M) && ..()
 
 /datum/keybinding/emote/carbon/human/airguitar
-	linked_emote = /datum/emote/living/carbon/human/airguitar
-	name = "Airguitar"
+	linked_emote ="airguitar"
+	name = "Запил на гитаре"
 
 /datum/keybinding/emote/carbon/human/cry
-	linked_emote = /datum/emote/living/carbon/human/cry
-	name = "Cry"
+	linked_emote ="cry"
+	name = "Плакать"
 
-/datum/keybinding/emote/carbon/human/dap
-	linked_emote = /datum/emote/living/carbon/human/dap
+/*/datum/keybinding/emote/carbon/human/dap //закоменчено и в эмоут панели
+	linked_emote ="dap
 	name = "Dap"
-
+*/
 /datum/keybinding/emote/carbon/human/eyebrow
-	linked_emote = /datum/emote/living/carbon/human/eyebrow
-	name = "Eyebrow"
+	linked_emote ="eyebrow"
+	name = "Приподнять бровь"
 
 /datum/keybinding/emote/carbon/human/grumble
-	linked_emote = /datum/emote/living/carbon/human/grumble
-	name = "Grumble"
+	linked_emote ="grumble"
+	name = "Ворчать"
 
 /datum/keybinding/emote/carbon/human/hug
-	linked_emote = /datum/emote/living/carbon/human/hug
-	name = "Hug"
+	linked_emote ="hug"
+	name = "Обнимать"
 
 /datum/keybinding/emote/carbon/human/mumble
-	linked_emote = /datum/emote/living/carbon/human/mumble
-	name = "Mumble"
+	linked_emote ="mumble"
+	name = "Бормотать"
 
 /datum/keybinding/emote/carbon/human/nod
-	linked_emote = /datum/emote/living/carbon/human/nod
-	name = "Nod"
+	linked_emote ="nod"
+	name = "Кивнуть"
 
 /datum/keybinding/emote/carbon/human/scream
-	linked_emote = /datum/emote/living/carbon/human/scream
-	name = "Scream"
+	linked_emote ="scream"
+	name = "Кричать"
 
 /datum/keybinding/emote/carbon/human/gasp
-	linked_emote = /datum/emote/living/carbon/human/gasp
-	name = "Gasp"
+	linked_emote ="gasp"
+	name = "Задыхаться"
 
 /datum/keybinding/emote/carbon/human/shake
-	linked_emote = /datum/emote/living/carbon/human/shake
-	name = "Shake"
+	linked_emote ="shake"
+	name = "Трясти головой"
 
 /datum/keybinding/emote/carbon/human/pale
-	linked_emote = /datum/emote/living/carbon/human/pale
-	name = "Pale"
+	linked_emote ="pale"
+	name = "Бледнеть"
 
 /datum/keybinding/emote/carbon/human/raise
-	linked_emote = /datum/emote/living/carbon/human/raise
-	name = "Raise"
+	linked_emote ="raise"
+	name = "Поднять руку"
 
 /datum/keybinding/emote/carbon/human/salute
-	linked_emote = /datum/emote/living/carbon/human/salute
-	name = "Salute"
+	linked_emote ="salute"
+	name = "Салютовать"
 
 /datum/keybinding/emote/carbon/human/shrug
-	linked_emote = /datum/emote/living/carbon/human/shrug
-	name = "Shrug"
+	linked_emote ="shrug"
+	name = "Пожать плечами"
 
 /datum/keybinding/emote/carbon/human/sniff
-	linked_emote = /datum/emote/living/carbon/human/sniff
-	name = "Sniff"
-
-/datum/keybinding/emote/carbon/human/johnny
-	linked_emote = /datum/emote/living/carbon/human/johnny
-	name = "Johnny"
+	linked_emote ="sniff"
+	name = "Понюхать"
 
 /datum/keybinding/emote/carbon/human/sneeze
-	linked_emote = /datum/emote/living/carbon/human/sneeze
-	name = "Sneeze"
+	linked_emote ="sneeze"
+	name = "Чихнуть"
 
 /datum/keybinding/emote/carbon/human/slap
-	linked_emote = /datum/emote/living/carbon/human/slap
-	name = "Slap"
+	linked_emote ="slap"
+	name = "Шлёпнуть"
 
 /datum/keybinding/emote/carbon/human/wink
-	linked_emote = /datum/emote/living/carbon/human/wink
-	name = "Wink"
+	linked_emote ="wink"
+	name = "Подмигнуть"
 
 /datum/keybinding/emote/carbon/human/highfive
-	linked_emote = /datum/emote/living/carbon/human/highfive
-	name = "High Five"
+	linked_emote ="highfive"
+	name = "Дать Пять"
 
 /datum/keybinding/emote/carbon/human/handshake
-	linked_emote = /datum/emote/living/carbon/human/handshake
-	name = "Handshake"
+	linked_emote ="handshake"
+	name = "Пожать руку"
 
 /datum/keybinding/emote/carbon/human/snap
-	linked_emote = /datum/emote/living/carbon/human/snap
-	name = "Snap"
+	linked_emote ="snap"
+	name = "Щёлкнуть пальцами"
 
 /datum/keybinding/emote/carbon/human/fart
-	linked_emote = /datum/emote/living/carbon/human/fart
-	name = "Fart"
+	linked_emote ="fart"
+	name = "Пёрнуть"
 
 /datum/keybinding/emote/carbon/human/wag
-	linked_emote = /datum/emote/living/carbon/human/wag
-	name = "Wag"
+	linked_emote ="wag"
+	name = "Махать хвостом"
 
 /datum/keybinding/emote/carbon/human/wag/stop
-	linked_emote = /datum/emote/living/carbon/human/wag/stop
-	name = "Stop Wag"
-
-/datum/keybinding/emote/carbon/human/scream/screech
-	linked_emote = /datum/emote/living/carbon/human/scream/screech
-	name = "Screech"
+	linked_emote ="swag"
+	name = "Перестать махать хвостом"
 
 /datum/keybinding/emote/carbon/human/scream/screech/roar
-	linked_emote = /datum/emote/living/carbon/human/scream/screech/roar
-	name = "Roar"
+	linked_emote ="roar"
+	name = "Рычать"
 
 /datum/keybinding/emote/carbon/human/flap
-	linked_emote = /datum/emote/living/carbon/human/flap
-	name = "Flap"
+	linked_emote ="flap"
+	name = "Махать крыльями"
 
 /datum/keybinding/emote/carbon/human/flap/angry
-	linked_emote = /datum/emote/living/carbon/human/flap/angry
-	name = "Angry Flap"
-
-/datum/keybinding/emote/carbon/human/flutter
-	linked_emote = /datum/emote/living/carbon/human/flutter
-	name = "Flutter"
+	linked_emote ="aflap"
+	name = "Агрессивно махать крыльями"
 
 /datum/keybinding/emote/carbon/human/quill
-	linked_emote = /datum/emote/living/carbon/human/quill
-	name = "Quill"
+	linked_emote ="quill"
+	name = "Шуршать перьями"
 
 /datum/keybinding/emote/carbon/human/warble
-	linked_emote = /datum/emote/living/carbon/human/warble
-	name = "Warble"
+	linked_emote ="warble"
+	name = "Трель"
 
 /datum/keybinding/emote/carbon/human/clack
-	linked_emote = /datum/emote/living/carbon/human/clack
-	name = "Clack"
+	linked_emote ="clack"
+	name = "Трещать"
 
 /datum/keybinding/emote/carbon/human/clack/click
-	linked_emote = /datum/emote/living/carbon/human/clack/click
-	name = "Click"
-
-/datum/keybinding/emote/carbon/human/drask_talk/drone
-	linked_emote = /datum/emote/living/carbon/human/drask_talk/drone
-	name = "Drone"
+	linked_emote ="click"
+	name = "Щёлкать"
 
 /datum/keybinding/emote/carbon/human/drask_talk/hum
-	linked_emote = /datum/emote/living/carbon/human/drask_talk/hum
-	name = "Hum"
-
-/datum/keybinding/emote/carbon/human/drask_talk/rumble
-	linked_emote = /datum/emote/living/carbon/human/drask_talk/rumble
-	name = "Rumble"
+	linked_emote ="hum"
+	name = "Гудеть"
 
 /datum/keybinding/emote/carbon/human/hiss
-	linked_emote = /datum/emote/living/carbon/human/hiss
-	name = "Hiss"
+	linked_emote ="hiss"
+	name = "Шипеть"
 
 /datum/keybinding/emote/carbon/human/creak
-	linked_emote = /datum/emote/living/carbon/human/creak
-	name = "Creak"
+	linked_emote ="creak"
+	name = "Скрипеть"
 
 /datum/keybinding/emote/carbon/human/squish
-	linked_emote = /datum/emote/living/carbon/human/squish
-	name = "Squish"
+	linked_emote ="squish"
+	name = "Хлюпать"
 
 /datum/keybinding/emote/carbon/human/howl
-	linked_emote = /datum/emote/living/carbon/human/howl
-	name = "Howl"
+	linked_emote ="howl"
+	name = "Выть"
 
 /datum/keybinding/emote/carbon/human/growl
-	linked_emote = /datum/emote/living/carbon/human/growl
-	name = "Growl"
-
-/datum/keybinding/emote/carbon/human/rattle
-	linked_emote = /datum/emote/living/carbon/human/rattle
-	name = "Rattle"
-
-/datum/keybinding/emote/carbon/human/monkey/gnarl
-	linked_emote = /datum/emote/living/carbon/human/monkey/gnarl
-	name = "Gnarl (Monkey)"
-
-/datum/keybinding/emote/carbon/human/monkey/roll
-	linked_emote = /datum/emote/living/carbon/human/monkey/roll
-	name = "Roll (Monkey)"
+	linked_emote ="growl"
+	name = "Рычать"
 
 /datum/keybinding/emote/carbon/human/monkey/scratch
-	linked_emote = /datum/emote/living/carbon/human/monkey/scratch
-	name = "Scratch (Monkey)"
+	linked_emote ="scratch"
+	name = "Почесаться"
 
-/datum/keybinding/emote/carbon/human/monkey/tail
-	linked_emote = /datum/emote/living/carbon/human/monkey/tail
-	name = "Tail (Monkey)"
+/datum/keybinding/emote/carbon/human/whip
+	linked_emote ="whip"
+	name = "Ударить хвостом"
+
+/datum/keybinding/emote/carbon/human/whips
+	linked_emote ="whips"
+	name = "Хлестать хвостом"
 
 /datum/keybinding/emote/silicon
 	category = KB_CATEGORY_EMOTE_SILICON
@@ -520,40 +401,32 @@
 	return (issilicon(M) || ismachineperson(M)) && ..()
 
 /datum/keybinding/emote/silicon/scream
-	linked_emote = /datum/emote/living/silicon/scream
-	name = "Scream"
+	linked_emote ="scream"
+	name = "Кричать"
 
 /datum/keybinding/emote/silicon/ping
-	linked_emote = /datum/emote/living/silicon/ping
-	name = "Ping"
+	linked_emote ="ping"
+	name = "Звенеть"
 
 /datum/keybinding/emote/silicon/buzz
-	linked_emote = /datum/emote/living/silicon/buzz
-	name = "Buzz"
+	linked_emote ="buzz"
+	name = "Жужжать"
 
 /datum/keybinding/emote/silicon/buzz2
-	linked_emote = /datum/emote/living/silicon/buzz2
-	name = "Buzzz"
+	linked_emote ="buzz2"
+	name = "Жужжать раздражённо"
 
 /datum/keybinding/emote/silicon/beep
-	linked_emote = /datum/emote/living/silicon/beep
-	name = "Beep"
+	linked_emote ="beep"
+	name = "Пищать"
 
 /datum/keybinding/emote/silicon/yes
-	linked_emote = /datum/emote/living/silicon/yes
-	name = "Yes"
+	linked_emote ="yes"
+	name = "Утвердительно"
 
 /datum/keybinding/emote/silicon/no
-	linked_emote = /datum/emote/living/silicon/no
-	name = "No"
-
-/datum/keybinding/emote/silicon/law
-	linked_emote = /datum/emote/living/silicon/law
-	name = "Law"
-
-/datum/keybinding/emote/silicon/halt
-	linked_emote = /datum/emote/living/silicon/halt
-	name = "Halt"
+	linked_emote ="no"
+	name = "Отрицательно"
 
 /datum/keybinding/emote/simple_animal
 	category = KB_CATEGORY_EMOTE_ANIMAL
@@ -561,34 +434,30 @@
 /datum/keybinding/emote/simple_animal/can_use(client/C, mob/M)
 	return isanimal(M) && ..()
 
-/datum/keybinding/emote/simple_animal/diona_chirp
-	linked_emote = /datum/emote/living/simple_animal/diona_chirp
-	name = "Chirp (Nymph)"
-
 /datum/keybinding/emote/simple_animal/pet/dog/bark
-	linked_emote = /datum/emote/living/simple_animal/pet/dog/bark
-	name = "Bark (Dog)"
+	linked_emote ="bark"
+	name = "Лаять (пёс)"
 
 /datum/keybinding/emote/simple_animal/pet/dog/yelp
-	linked_emote = /datum/emote/living/simple_animal/pet/dog/yelp
-	name = "Yelp (Dog)"
+	linked_emote ="yelp"
+	name = "Визг (пёс)"
 
 /datum/keybinding/emote/simple_animal/pet/dog/growl
-	linked_emote = /datum/emote/living/simple_animal/pet/dog/growl
-	name = "Growl (Dog)"
+	linked_emote ="growl"
+	name = "Рычать (пёс)"
 
 /datum/keybinding/emote/simple_animal/mouse/squeak
-	linked_emote = /datum/emote/living/simple_animal/mouse/squeak
-	name = "Squeak (Mouse)"
+	linked_emote ="squeak"
+	name = "Squeak (мышь)"
 
 /datum/keybinding/emote/simple_animal/pet/cat/meow
-	linked_emote = /datum/emote/living/simple_animal/pet/cat/meow
-	name = "Meow (Cat)"
+	linked_emote ="meow"
+	name = "Мяукать (кот)"
 
 /datum/keybinding/emote/simple_animal/pet/cat/hiss
-	linked_emote = /datum/emote/living/simple_animal/pet/cat/hiss
-	name = "Hiss (Cat)"
+	linked_emote ="hiss"
+	name = "Шипеть (кот)"
 
 /datum/keybinding/emote/simple_animal/pet/cat/purr
-	linked_emote = /datum/emote/living/simple_animal/pet/cat/purr
-	name = "Purr (Cat)"
+	linked_emote ="purr"
+	name = "Мурчать (кот)"

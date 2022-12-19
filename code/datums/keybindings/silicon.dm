@@ -5,7 +5,7 @@
 	return issilicon(M) && ..()
 
 /datum/keybinding/silicon/switch_intent
-	name = "Switch Intents"
+	name = "Смена Intents"
 	keys = list("4")
 
 /datum/keybinding/silicon/switch_intent/down(client/C)

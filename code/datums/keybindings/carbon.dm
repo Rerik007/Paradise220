@@ -5,7 +5,7 @@
 	return iscarbon(M) && ..()
 
 /datum/keybinding/carbon/throw_mode
-	name = "Throw Mode (Toggle)"
+	name = "Режим броска (переключить)"
 	keys = list("R", "Southwest")
 
 /datum/keybinding/carbon/throw_mode/down(client/C)
@@ -14,7 +14,7 @@
 	M.toggle_throw_mode()
 
 /datum/keybinding/carbon/throw_mode/hold
-	name = "Throw Mode (Hold)"
+	name = "Режим броска (Зажать)"
 	keys = null
 
 /datum/keybinding/carbon/throw_mode/hold/up(client/C)
@@ -32,22 +32,22 @@
 	M.a_intent_change(intent)
 
 /datum/keybinding/carbon/intent/help
-	name = "Help Intent (Tap)"
+	name = "Help Intent (нажать)"
 	intent = INTENT_HELP
 	keys = list("1")
 
 /datum/keybinding/carbon/intent/disarm
-	name = "Disarm Intent (Tap)"
+	name = "Disarm Intent (нажать)"
 	intent = INTENT_DISARM
 	keys = list("2")
 
 /datum/keybinding/carbon/intent/grab
-	name = "Grab Intent (Tap)"
+	name = "Grab Intent (нажать)"
 	intent = INTENT_GRAB
 	keys = list("3")
 
 /datum/keybinding/carbon/intent/harm
-	name = "Harm Intent (Tap)"
+	name = "Harm Intent (нажать)"
 	intent = INTENT_HARM
 	keys = list("4")
 
@@ -67,17 +67,17 @@
 	prev_intent = null
 
 /datum/keybinding/carbon/intent/hold/help
-	name = "Help Intent (Hold)"
+	name = "Help Intent (зажать)"
 	intent = INTENT_HELP
 
 /datum/keybinding/carbon/intent/hold/disarm
-	name = "Disarm Intent (Hold)"
+	name = "Disarm Intent (зажать)"
 	intent = INTENT_DISARM
 
 /datum/keybinding/carbon/intent/hold/grab
-	name = "Grab Intent (Hold)"
+	name = "Grab Intent (зажать)"
 	intent = INTENT_GRAB
 
 /datum/keybinding/carbon/intent/hold/harm
-	name = "Harm Intent (Hold)"
+	name = "Harm Intent (зажать)"
 	intent = INTENT_HARM

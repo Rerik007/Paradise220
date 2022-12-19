@@ -4,27 +4,27 @@
 	var/move_dir
 
 /datum/keybinding/movement/north
-	name = "Move North"
+	name = "Идти наверх"
 	keys = list("W", "North")
 	move_dir = NORTH
 
 /datum/keybinding/movement/south
-	name = "Move South"
+	name = "Идти вниз"
 	keys = list("S", "South")
 	move_dir = SOUTH
 
 /datum/keybinding/movement/east
-	name = "Move East"
+	name = "Идти вправо"
 	keys = list("D", "East")
 	move_dir = EAST
 
 /datum/keybinding/movement/west
-	name = "Move West"
+	name = "Идти влево"
 	keys = list("A", "West")
 	move_dir = WEST
 
 /datum/keybinding/lock
-	name = "Movement Lock (Prevents Moving When Held)"
+	name = "Остановиться (зажать)"
 	category = KB_CATEGORY_MOVEMENT
 	keys = list("Ctrl")
 

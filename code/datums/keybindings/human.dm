@@ -5,7 +5,7 @@
 	return ishuman(M) && ..()
 
 /datum/keybinding/human/toggle_holster
-	name = "Toggle Holster"
+	name = "Использовать кобуру"
 	keys = list("H")
 
 /datum/keybinding/human/toggle_holster/down(client/C)

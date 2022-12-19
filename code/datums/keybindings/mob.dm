@@ -3,7 +3,7 @@
 
 // Hands
 /datum/keybinding/mob/use_held_object
-	name = "Use Held Object"
+	name = "Использовать вещь в руке"
 	keys = list("Y", "Z", "Southeast")
 
 /datum/keybinding/mob/use_held_object/down(client/C)
@@ -11,7 +11,7 @@
 	C.mob.mode()
 
 /datum/keybinding/mob/equip_held_object
-	name = "Equip Held Object"
+	name = "Экипировать вещь"
 	keys = list("E")
 
 /datum/keybinding/mob/equip_held_object/down(client/C)
@@ -19,7 +19,7 @@
 	C.mob.quick_equip()
 
 /datum/keybinding/mob/drop_held_object
-	name = "Drop Held Object"
+	name = "Выложить вещь в руке"
 	keys = list("Q", "Northwest")
 
 /datum/keybinding/mob/drop_held_object/down(client/C)
@@ -31,7 +31,7 @@
 		to_chat(C, "<span class='warning'>You have nothing to drop in your hand!</span>")
 
 /datum/keybinding/mob/swap_hands
-	name = "Swap Hands"
+	name = "Поменять руки"
 	keys = list("X", "Northeast")
 
 /datum/keybinding/mob/swap_hands/down(client/C)
@@ -40,7 +40,7 @@
 
 // Intents
 /datum/keybinding/mob/prev_intent
-	name = "Previous Intent"
+	name = "Предыдущий Intent"
 	keys = list("F")
 
 /datum/keybinding/mob/prev_intent/down(client/C)
@@ -48,7 +48,7 @@
 	C.mob.a_intent_change(INTENT_HOTKEY_LEFT)
 
 /datum/keybinding/mob/next_intent
-	name = "Next Intent"
+	name = "Следующий Intent"
 	keys = list("G", "Insert")
 
 /datum/keybinding/mob/next_intent/down(client/C)
@@ -56,8 +56,8 @@
 	C.mob.a_intent_change(INTENT_HOTKEY_RIGHT)
 
 /datum/keybinding/mob/walk_hold
-	name = "Walk (Hold)"
-	keys = list("C")
+	name = "Идти (Зажать)"
+	keys = list("Alt")
 
 /datum/keybinding/mob/walk_hold/down(client/C)
 	. = ..()
@@ -68,7 +68,7 @@
 	C.mob.toggle_move_intent()
 
 /datum/keybinding/mob/walk_toggle
-	name = "Walk (Toggle)"
+	name = "Идти (Переключить)"
 
 /datum/keybinding/mob/walk_toggle/down(client/C)
 	. = ..()
@@ -76,8 +76,8 @@
 
 // Other
 /datum/keybinding/mob/stop_pulling
-	name = "Stop Pulling"
-	keys = list("Delete")
+	name = "Перестать тащить"
+	keys = list("C")
 
 /datum/keybinding/mob/stop_pulling/down(client/C)
 	. = ..()
@@ -95,27 +95,27 @@
 	C.mob.facedir(dir)
 
 /datum/keybinding/mob/face_dir/north
-	name = "Face North"
+	name = "Смотреть наверх"
 	keys = list("CtrlW", "CtrlNorth")
 	dir = NORTH
 
 /datum/keybinding/mob/face_dir/south
-	name = "Face South"
+	name = "Смотреть вниз"
 	keys = list("CtrlS", "CtrlSouth")
 	dir = SOUTH
 
 /datum/keybinding/mob/face_dir/east
-	name = "Face East"
+	name = "Смотреть вправо"
 	keys = list("CtrlD", "CtrlEast")
 	dir = EAST
 
 /datum/keybinding/mob/face_dir/west
-	name = "Face West"
+	name = "Смотреть влево"
 	keys = list("CtrlA", "CtrlWest")
 	dir = WEST
 
 /datum/keybinding/mob/target_cycle/head
-	name = "Target Head/Eyes/Mouth"
+	name = "Выбрать голову/глаза/рот"
 	keys = list("Numpad8")
 
 /datum/keybinding/mob/target_cycle/head/down(client/C)
@@ -123,7 +123,7 @@
 	C.body_toggle_head()
 
 /datum/keybinding/mob/target_cycle/r_arm
-	name = "Target Right Arm/Hand"
+	name = "Выбрать правую руку/кисть"
 	keys = list("Numpad4")
 
 /datum/keybinding/mob/target_cycle/r_arm/down(client/C)
@@ -131,7 +131,7 @@
 	C.body_r_arm()
 
 /datum/keybinding/mob/target_cycle/l_arm
-	name = "Target Left Arm/Hand"
+	name = "Выбрать левую руку/кисть"
 	keys = list("Numpad6")
 
 /datum/keybinding/mob/target_cycle/l_arm/down(client/C)
@@ -139,7 +139,7 @@
 	C.body_l_arm()
 
 /datum/keybinding/mob/target_cycle/r_leg
-	name = "Target Right Leg/Foot"
+	name = "Выбрать правую ногу/ступню"
 	keys = list("Numpad1")
 
 /datum/keybinding/mob/target_cycle/r_leg/down(client/C)
@@ -147,7 +147,7 @@
 	C.body_r_leg()
 
 /datum/keybinding/mob/target_cycle/l_leg
-	name = "Target Left Leg/Foot"
+	name = "Выбрать левую ногу/ступню"
 	keys = list("Numpad3")
 
 /datum/keybinding/mob/target_cycle/l_leg/down(client/C)
@@ -168,55 +168,55 @@
 	selector.set_selected_zone(body_part, C.mob)
 
 /datum/keybinding/mob/target/head
-	name = "Target Head"
+	name = "Выбрать голову"
 	body_part = BODY_ZONE_HEAD
 
 /datum/keybinding/mob/target/eyes
-	name = "Target Eyes"
+	name = "Выбрать глаза"
 	body_part = BODY_ZONE_PRECISE_EYES
 
 /datum/keybinding/mob/target/mouth
-	name = "Target Mouth"
+	name = "Выбрать рот"
 	body_part = BODY_ZONE_PRECISE_MOUTH
 
 /datum/keybinding/mob/target/chest
-	name = "Target Upper Body"
+	name = "Выбрать грудь"
 	body_part = BODY_ZONE_CHEST
 	keys = list("Numpad5")
 
 /datum/keybinding/mob/target/groin
-	name = "Target Lower Body"
+	name = "Выбрать пах"
 	body_part = BODY_ZONE_PRECISE_GROIN
 	keys = list("Numpad2")
 
 /datum/keybinding/mob/target/r_arm
-	name = "Target Right Arm"
+	name = "Выбрать правую руку"
 	body_part = BODY_ZONE_R_ARM
 
 /datum/keybinding/mob/target/r_hand
-	name = "Target Right Hand"
+	name = "Выбрать правую кисть"
 	body_part = BODY_ZONE_PRECISE_R_HAND
 
 /datum/keybinding/mob/target/l_arm
-	name = "Target Left Arm"
+	name = "Выбрать левую руку"
 	body_part = BODY_ZONE_L_ARM
 
 /datum/keybinding/mob/target/l_hand
-	name = "Target Left Hand"
+	name = "Выбрать левую кисть"
 	body_part = BODY_ZONE_PRECISE_L_HAND
 
 /datum/keybinding/mob/target/r_leg
-	name = "Target Right Leg"
+	name = "Выбрать правую ногу"
 	body_part = BODY_ZONE_R_LEG
 
 /datum/keybinding/mob/target/r_foot
-	name = "Target Right Foot"
+	name = "Выбрать правую ступню"
 	body_part = BODY_ZONE_PRECISE_R_FOOT
 
 /datum/keybinding/mob/target/l_leg
-	name = "Target Left Leg"
+	name = "Выбрать левую ногу"
 	body_part = BODY_ZONE_L_LEG
 
 /datum/keybinding/mob/target/l_foot
-	name = "Target Left Foot"
+	name = "Выбрать левую ступню"
 	body_part = BODY_ZONE_PRECISE_L_FOOT

@@ -22,4 +22,4 @@
 ///Length of held key rolling buffer
 #define HELD_KEY_BUFFER_LENGTH 15
 ///Maximum keys that can be bound to one button
-#define MAX_COMMANDS_PER_KEY 5
+#define MAX_COMMANDS_PER_KEY 3

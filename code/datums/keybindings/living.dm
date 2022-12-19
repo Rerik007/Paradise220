@@ -5,16 +5,16 @@
 	return isliving(M) && ..()
 
 /datum/keybinding/living/rest
-	name = "Rest"
-	keys = list("V")
+	name = "Лечь/встать"
+	keys = list("ShiftB")
 
 /datum/keybinding/living/rest/down(client/C)
 	. = ..()
 	var/mob/living/M = C.mob
-	M.rest()
+	M.lay_down()
 
 /datum/keybinding/living/resist
-	name = "Resist"
+	name = "Сопротивляться"
 	keys = list("B")
 
 /datum/keybinding/living/resist/down(client/C)
@@ -23,8 +23,8 @@
 	M.resist()
 
 /datum/keybinding/living/whisper
-	name = "Whisper"
-
+	name = "Шептать"
+	keys = list("ShiftT")
 /datum/keybinding/living/whisper/down(client/C)
 	var/mob/M = C.mob
 	M.set_typing_indicator(TRUE)

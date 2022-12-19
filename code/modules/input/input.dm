@@ -131,7 +131,7 @@
 			var/datum/keybinding/KB = kb
 			KB.down(src)
 			if(++keycount >= MAX_COMMANDS_PER_KEY)
-			break
+				break
 
 	mob.input_focus?.key_down(_key, src)
 
