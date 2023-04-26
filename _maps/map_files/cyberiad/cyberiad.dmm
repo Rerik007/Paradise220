@@ -19374,12 +19374,6 @@
 /obj/machinery/door/airlock/titanium,
 /turf/simulated/floor/shuttle,
 /area/shuttle/arrival/station)
-"aVY" = (
-/obj/structure/grille,
-/obj/structure/window/full/shuttle,
-/obj/structure/window/full/shuttle,
-/turf/simulated/floor/shuttle/plating,
-/area/shuttle/arrival/station)
 "aVZ" = (
 /obj/structure/grille,
 /obj/structure/window/full/shuttle,
@@ -108037,13 +108031,13 @@ aSf
 aSf
 aUk
 aSd
-aVY
+aVZ
 aXv
 aXs
 bba
 aXs
 aXs
-aVY
+aVZ
 aSd
 bgI
 aSf
