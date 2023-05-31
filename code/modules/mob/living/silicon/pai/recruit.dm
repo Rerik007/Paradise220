@@ -44,6 +44,9 @@ GLOBAL_DATUM_INIT(paiController, /datum/paiController, new) // Global handler fo
 			if(card.is_syndicate_type)
 				pai.syndipai = card.is_syndicate_type
 				pai.ram += card.extra_memory
+				if(!(card.upgrade && istype(card.upgrade, /obj/item/paicard_upgrade/protolate)))
+					pai.radio.keyslot = new /obj/item/encryptionkey/syndicate
+					pai.radio.recalculateChannels()
 
 			card.setPersonality(pai)
 			card.looking_for_personality = 0

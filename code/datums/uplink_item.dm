@@ -1567,7 +1567,6 @@ GLOBAL_LIST_INIT(uplink_items, subtypesof(/datum/uplink_item))
 	item = /obj/item/storage/box/syndie_kit/pai
 	cost = 5
 	excludefrom = list(UPLINK_TYPE_NUCLEAR, UPLINK_TYPE_SST)
-	surplus = 0
 	refundable = TRUE
 	refund_path = /obj/item/paicard_upgrade/unused
 	cant_discount = TRUE

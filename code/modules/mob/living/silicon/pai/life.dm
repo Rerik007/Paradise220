@@ -1,4 +1,4 @@
-#define PAI_CHEMICALS_COOLDOWN 15 SECONDS
+#define PAI_CHEMICALS_COOLDOWN 10 SECONDS
 
 /mob/living/silicon/pai/Life(seconds, times_fired)
 	. = ..()

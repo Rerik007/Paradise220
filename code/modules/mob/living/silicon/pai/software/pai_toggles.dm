@@ -117,7 +117,7 @@
 // Meson Vision //
 /datum/pai_software/vision/meson_vision
 	name = "Meson Vision"
-	ram_cost = 10
+	ram_cost = 5
 	id = "meson_vis"
 	ui_icon = "adjust"
 	toggle_software = TRUE
@@ -126,7 +126,7 @@
 // Advanced Security Hud //
 /datum/pai_software/adv_sec_hud
 	name = "Advanced Security HUD"
-	ram_cost = 20
+	ram_cost = 25
 	id = "adv_sec_hud"
 	ui_icon = "exclamation-triangle"
 	toggle_software = TRUE
@@ -144,7 +144,7 @@
 // Weakened AI Сapability //
 /datum/pai_software/weak_ai
 	name = "Weakened AI Capability"
-	ram_cost = 75
+	ram_cost = 70
 	id = "weak_ai"
 	ui_icon = "bug"
 	toggle_software = TRUE

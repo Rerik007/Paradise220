@@ -29,7 +29,7 @@
 	chemname = "Saline-Glucose Solution"
 	key = "salglu_solution"
 	chemdesc = "Heals all damage, but it requires more costs."
-	chemuse = 10
+	chemuse = 7
 
 /datum/pai_chem/earthsblood
 	chemname = "Earthsblood"

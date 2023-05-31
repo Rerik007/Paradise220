@@ -13,7 +13,7 @@
 	var/ram = 100	// Used as currency to purchase different abilities
 	var/userDNA		// The DNA string of our assigned user
 	var/obj/item/paicard/card	// The card we inhabit
-	var/obj/item/radio/radio		// Our primary radio
+	var/obj/item/radio/borg/radio		// Our primary radio
 	var/sight_mode = 0
 
 	var/chassis = "repairbot"   // A record of your chosen chassis.
@@ -88,7 +88,7 @@
 	var/slowdown = 0
 
 	/// max chemicals and cooldown recovery for chemicals module
-	var/chemicals = 20
+	var/chemicals = 30
 	var/last_change_chemicals = 0
 
 	var/syndipai = FALSE
@@ -101,7 +101,7 @@
 	sradio = new(src)
 	if(card)
 		if(!card.radio)
-			card.radio = new /obj/item/radio(card)
+			card.radio = new /obj/item/radio/borg(card)
 		radio = card.radio
 
 	//Default languages without universal translator software

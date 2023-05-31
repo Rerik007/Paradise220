@@ -726,7 +726,7 @@ GLOBAL_LIST_INIT(default_medbay_channels, list(
 	syndiekey = null
 
 	var/mob/living/silicon/robot/D = loc
-	if(D.module)
+	if(istype(D) && D.module)
 		for(var/ch_name in D.module.channels)
 			if(ch_name in channels)
 				continue

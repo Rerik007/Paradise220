@@ -352,6 +352,9 @@
 			pai.reset_software()
 			pai.ram += P.extra_memory
 			pai.syndipai = TRUE
+			if(!istype(I, /obj/item/paicard_upgrade/protolate))
+				pai.radio.keyslot = new /obj/item/encryptionkey/syndicate
+				pai.radio.recalculateChannels()
 			qdel(P)
 			return
 		if(upgrade || is_syndicate_type)
@@ -404,6 +407,8 @@
 
 /obj/item/paicard_upgrade/unused
 	used = FALSE
+
+/obj/item/paicard_upgrade/protolate
 
 /obj/item/paper/pai_upgrade
 	name = "Инструкция по применению"
