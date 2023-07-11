@@ -70,12 +70,8 @@
 	var/update_flags = STATUS_UPDATE_NONE
 	update_flags |= M.AdjustEyeBlurry(-1, FALSE)
 	update_flags |= M.AdjustEyeBlind(-1, FALSE)
-	switch(current_cycle)
-		if(1 to 20)
-			//nothing
-		if(21 to INFINITY)
-			if(prob(current_cycle-10))
-				update_flags |= M.CureNearsighted(FALSE)
+	if(current_cycle > 20 && prob(current_cycle-10))
+		update_flags |= M.CureNearsighted(FALSE)
 	return ..() | update_flags
 
 /datum/reagent/consumable/drink/doctor_delight

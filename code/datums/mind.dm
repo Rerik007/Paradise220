@@ -960,7 +960,7 @@
 				new_objective = new /datum/objective/get_money
 				var/datum/objective/get_money/money_objective = new_objective
 				var/input_sum = null
-				var/accounts_procent = 60
+				var/accounts_procent
 				if(alert(usr, "Хотите сами подобрать сумму? Если нет, то будет выбрана сумма от процентажа со всех аккаунтов.", "Введите сумму", "Yes", "No") == "Yes")
 					input_sum = input("Введите необходимую денежную сумму:", "Денежная Сумма") as num|null
 				else
@@ -968,7 +968,7 @@
 					if(accounts_procent)
 						accounts_procent = clamp(accounts_procent, 1, 100)
 					else
-						accounts_procent = initial(accounts_procent)
+						accounts_procent = 60
 				money_objective.owner = src
 				money_objective.new_cash(input_sum, accounts_procent)
 
@@ -2081,8 +2081,7 @@
 
 /datum/mind/proc/remove_devil_role()
 	if(src in SSticker.mode.devils)
-		if(istype(current,/mob/living/carbon/true_devil/))
-		else
+		if(!(istype(current, /mob/living/carbon/true_devil)))
 			SSticker.mode.devils -= src
 			SSticker.mode.update_devil_icons_removed(src)
 			special_role = null

@@ -176,8 +176,6 @@
 				dismantle_wall(1, 1)
 		if(3.0)
 			take_damage(rand(0, 250))
-		else
-	return
 
 /turf/simulated/wall/blob_act(obj/structure/blob/B)
 	if(prob(50))

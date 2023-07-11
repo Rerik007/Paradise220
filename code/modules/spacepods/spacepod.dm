@@ -81,7 +81,6 @@
 			part_type = PAINT
 		if("Windows")
 			part_type = WINDOW
-		else
 	var/coloradd = input(user, "Choose a color", "Color") as color
 	colors[part_type] = coloradd
 	if(!has_paint)

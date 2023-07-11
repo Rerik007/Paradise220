@@ -359,9 +359,6 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 				else
 					overlays_standing[HEAD_ACCESSORY_LAYER] = mutable_appearance(head_accessory_standing, layer = -HEAD_ACCESSORY_LAYER)
 					apply_overlay(HEAD_ACCESSORY_LAYER)
-		else
-			//warning("Invalid ha_style for [species.name]: [ha_style]")
-
 
 
 //HAIR OVERLAY
@@ -458,9 +455,6 @@ GLOBAL_LIST_EMPTY(damage_icon_parts)
 				else
 					overlays_standing[FHAIR_LAYER] = mutable_appearance(face_standing, layer = -FHAIR_LAYER)
 					apply_overlay(FHAIR_LAYER)
-		else
-			//warning("Invalid f_style for [species.name]: [f_style]")
-
 
 
 /mob/living/carbon/human/update_mutations()

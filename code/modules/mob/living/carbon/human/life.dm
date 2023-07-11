@@ -108,6 +108,7 @@
 	else
 		//blindness
 		if(BLINDNESS in mutations) // Disabled-blind, doesn't get better on its own
+			pass()
 
 		else if(eye_blind)		       // Blindness, heals slowly over time
 			AdjustEyeBlind(-1)

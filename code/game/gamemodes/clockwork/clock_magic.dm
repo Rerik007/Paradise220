@@ -231,7 +231,6 @@
 		if(source.used)
 			qdel(source)
 			source = null
-		else
 	return ..()
 
 /obj/item/melee/clock_magic/construction

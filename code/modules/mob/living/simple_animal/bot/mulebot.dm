@@ -462,8 +462,6 @@
 		var/speed = (!wires.is_cut(WIRE_MOTOR1) ? 1 : 0) + (!wires.is_cut(WIRE_MOTOR2) ? 2 : 0)
 		var/num_steps = 0
 		switch(speed)
-			if(0)
-				// do nothing
 			if(1)
 				num_steps = 10
 			if(2)
@@ -731,6 +729,7 @@
 			else
 				to_chat(src, "<span class='warning big'>LOAD</span>")
 		if("autoret", "autopick", "target")
+			return
 		else
 			..()
 

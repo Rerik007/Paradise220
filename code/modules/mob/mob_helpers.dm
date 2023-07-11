@@ -311,8 +311,10 @@
 	var/newletter=""
 	while(counter>=1)
 		newletter=copytext_char(phrase,(leng-counter)+1,(leng-counter)+2)
-		if(newletter in list(" ", "!", "?", ".", ","))
-			//do nothing
+		if(newletter in list(" ", "!", "?", ".", ",")) //skip
+			counter -= 1
+			continue
+
 		else if(lowertext(newletter) in list("a", "e", "i", "o", "u", "y", "а", "е", "ё", "и", "о", "у", "ы", "э", "ю", "я"))
 			newletter = "пф"
 		else
