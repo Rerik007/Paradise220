@@ -62,3 +62,11 @@ GLOBAL_LIST_INIT(cooking_reagents, list(RECIPE_MICROWAVE = list(), RECIPE_OVEN =
 GLOBAL_LIST_EMPTY(geoip_ckey_updated)
 
 GLOBAL_LIST_INIT(all_taipan_jobs, list(TAIPAN_SCIENTIST,TAIPAN_MEDIC,TAIPAN_BOTANIST,TAIPAN_CARGO,TAIPAN_CHEF,TAIPAN_ENGINEER,TAIPAN_COMMS,TAIPAN_RD,CYBORG))
+
+GLOBAL_LIST_EMPTY(centcomm_departaments)
+GLOBAL_LIST_EMPTY(plasma_departaments)
+GLOBAL_LIST_EMPTY(corporations)
+
+GLOBAL_LIST_EMPTY(quest_storages)
+GLOBAL_LIST_EMPTY(plasma_quest_storages)
+GLOBAL_LIST_EMPTY(cargo_announcers)

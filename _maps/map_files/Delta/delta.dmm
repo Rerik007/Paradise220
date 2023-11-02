@@ -10237,6 +10237,7 @@
 	},
 /obj/effect/decal/warning_stripes/west,
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/computer/supplyquest,
 /turf/simulated/floor/plasteel,
 /area/quartermaster/storage)
 "bqr" = (
@@ -15209,12 +15210,10 @@
 /turf/space,
 /area/space)
 "bMz" = (
-/obj/machinery/computer/security/mining{
-	dir = 8
-	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 25
 	},
+/obj/machinery/computer/supplyquest,
 /turf/simulated/floor/plasteel{
 	dir = 4;
 	icon_state = "brown"
@@ -33464,6 +33463,7 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/machinery/cargo_announcer,
 /turf/simulated/floor/plasteel{
 	icon_state = "neutralfull"
 	},
@@ -63215,6 +63215,10 @@
 	icon_state = "tranquillite"
 	},
 /area/crew_quarters/theatre)
+"iFt" = (
+/obj/machinery/cargo_announcer,
+/turf/simulated/wall,
+/area/quartermaster/storage)
 "iFu" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -172583,7 +172587,7 @@ gKs
 cfe
 aCA
 qMV
-dmq
+iFt
 dcN
 bZI
 eZs
