@@ -94,7 +94,7 @@ const StatusPane = (properties, context) => {
 const getRewardColor = (reward, isCorp) => {
   if (isCorp) reward /= 10;
 
-	if (reward > 1100) return "purple";
+  if (reward > 1100) return "purple";
   if (reward > 500) return "orange";
   if (reward > 250) return "yellow";
   return "green";
