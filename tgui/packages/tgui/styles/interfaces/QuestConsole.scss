@@ -27,8 +27,9 @@
   &:not(&--dimmed):hover {
     background-color: color.adjust(
       Section.$color-background,
-      $lightness: 30%);
+      $lightness: 30%
+    );
 
-      cursor: pointer;
+    cursor: pointer;
   }
 }
