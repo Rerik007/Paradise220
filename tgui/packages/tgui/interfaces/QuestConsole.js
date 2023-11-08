@@ -22,7 +22,7 @@ const mapTwoByTwo = (a, c) => {
 };
 
 
-export const QuestConsole = (props, context) => {
+export const QuestConsole = (properties, context) => {
   const [tabName, setTab] = useLocalState(context, 'tabName', 'centcomm');
   return (
     <Window resizable>
