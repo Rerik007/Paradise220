@@ -148,11 +148,12 @@ const QuestItem = (properties, context) => {
     <Section
       title={`Order from ${quest.target_departament}`}
       className={`QuestConsoleSection QuestConsoleSection--${rewardColor} ${(cardButtonsShown === properties.id) && 'QuestConsoleSection--dimmed'} ${(quest.active) && 'QuestConsoleSection--active'}`}
-      height="100%" stretchContents position="relative" overflow="hidden"
+      height="100%" stretchContents position="relative" overflow="clip"
       onClick={() => setCardButtonsShown(cardButtonsShown !== properties.id ? properties.id : -1)}>
       {(!quest.fast_bonus) || (<QuestFastTimeBonus color={rewardColor} />)}
       <Flex
-        className="QuestConsoleSection__content" direction="column" height="78%">
+        className="QuestConsoleSection__content"
+        direction="column" height="calc(100% - 33px)">
         <Flex.Item>
           <Table>
             {mapTwoByTwo(quest.quests_items, (task1, task2, index) => (
