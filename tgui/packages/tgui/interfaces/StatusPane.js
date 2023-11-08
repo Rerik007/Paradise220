@@ -16,10 +16,10 @@ export const StatusPane = (properties, context) => {
   let statusText;
   if (!moving) {
     if (!at_station)
-      statusText = "Docked off-station";
+    { statusText = "Docked off-station"; }
 
     else
-      statusText = "Docked at the station";
+    { statusText = "Docked at the station"; }
   } else {
     statusText = "Shuttle is en route (ETA: " + timeleft + " minutes)";
   }
