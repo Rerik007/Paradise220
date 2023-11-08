@@ -139,7 +139,7 @@ const QuestFastTimeBonus = properties => (
 
 
 const QuestItem = (properties, context) => {
-  const [cardButtonsShown, setCardButtonsShown] = useLocalState(context, `cardButtonsShown`, false);
+  const [cardWithShownMenu, setCardWithShownMenu] = useLocalState(context, `cardWithShownMenu`, false);
   const { act } = useBackend(context);
   const { quest } = properties;
   const isCorp = quest.customer === 'corporation';
@@ -147,9 +147,9 @@ const QuestItem = (properties, context) => {
   return (
     <Section
       title={`Order from ${quest.target_departament}`}
-      className={`QuestConsoleSection QuestConsoleSection--${rewardColor} ${(cardButtonsShown === properties.id) && 'QuestConsoleSection--dimmed'} ${(quest.active) && 'QuestConsoleSection--active'}`}
+      className={`QuestConsoleSection QuestConsoleSection--${rewardColor} ${(cardWithShownMenu === quest.ref) && 'QuestConsoleSection--dimmed'} ${(quest.active) && 'QuestConsoleSection--active'}`}
       height="100%" stretchContents position="relative" overflow="clip"
-      onClick={() => setCardButtonsShown(cardButtonsShown !== properties.id ? properties.id : -1)}>
+      onClick={() => setCardWithShownMenu(cardWithShownMenu !== quest.ref ? quest.ref : -1)}>
       {(!quest.fast_bonus) || (<QuestFastTimeBonus color={rewardColor} />)}
       <Flex
         className="QuestConsoleSection__content"
@@ -178,7 +178,7 @@ const QuestItem = (properties, context) => {
           </Table>
         </Flex.Item>
       </Flex>
-      {(cardButtonsShown !== properties.id)
+      {(cardWithShownMenu !== quest.ref)
       || (
         <Fragment>
           <Box
