@@ -27,7 +27,7 @@
 
 
 /obj/machinery/portable_atmospherics/scrubber/update_icon_state()
-	icon_state = "pscrubbe:[on]"
+	icon_state = "pscrubber:[on]"
 
 
 /obj/machinery/portable_atmospherics/scrubber/update_overlays()
@@ -161,7 +161,7 @@
 /obj/machinery/portable_atmospherics/scrubber/huge
 	name = "Huge Air Scrubber"
 	icon_state = "scrubber:0"
-	anchored = 1
+	anchored = TRUE
 	volume = 50000
 	volume_rate = 5000
 	widenet = 1
@@ -182,10 +182,10 @@
 
 
 /obj/machinery/portable_atmospherics/scrubber/huge/update_icon_state()
-	icon_state = "pscrubbe:[on]"
+	icon_state = "scrubber:[on]"
 
 
-/obj/machinery/portable_atmospherics/scrubber/update_overlays()
+/obj/machinery/portable_atmospherics/scrubber/huge/update_overlays()
 	. = list()
 
 

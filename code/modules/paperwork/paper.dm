@@ -31,7 +31,7 @@
 	var/info_links	//A different version of the paper which includes html links at fields and EOF
 	var/stamps		//The (text for the) stamps on the paper.
 	var/fields = 0		//Amount of user created fields
-	var/language = "Galactic Common" //The language of paper. For now using only in case of Thetta
+	var/language = LANGUAGE_GALACTIC_COMMON //The language of paper. For now using only in case of Thetta
 	var/list/stamped
 	var/list/stamp_overlays
 	var/ico[0]      //Icons and
@@ -599,7 +599,7 @@
 /obj/item/paper/flag
 	icon_state = "flag_neutral"
 	item_state = "paper"
-	anchored = 1.0
+	anchored = TRUE
 
 /obj/item/paper/jobs
 	name = "Job Information"
@@ -675,7 +675,7 @@
 /obj/item/paper/flag
 	icon_state = "flag_neutral"
 	item_state = "paper"
-	anchored = 1.0
+	anchored = TRUE
 
 /obj/item/paper/jobs
 	name = "Job Information"
@@ -744,7 +744,7 @@
 	name = "paper"
 	header = "<p><img style='display: block; margin-left: auto; margin-right: auto;' src='ussplogo.png' width='220' height='135' /></p><hr />"
 	info =  ""
-	language = "Neo-Russkiya"
+	language = LANGUAGE_NEO_RUSSIAN
 
 /obj/item/paper/solgov
 	name = "paper"
