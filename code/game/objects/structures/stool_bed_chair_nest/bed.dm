@@ -75,6 +75,27 @@
 			new buildstacktype(loc, buildstackamount)
 	..()
 
+/obj/structure/bed/strawnest
+	name = "straw nest"
+	desc = "This is used to lie on, feels itchy."
+	icon_state = "strawnest"
+	max_integrity = 50
+	buckle_offset = -2
+	comfort = 0.1
+	buildstacktype = /obj/item/reagent_containers/food/snacks/grown/wheat
+	buildstackamount = 5
+	anchored = FALSE
+
+/obj/structure/bed/strawnest/Move()
+	var/grass_sound = pick('sound/effects/footstep/grass1.ogg', 'sound/effects/footstep/grass2.ogg', 'sound/effects/footstep/grass3.ogg', 'sound/effects/footstep/grass4.ogg')
+	. = ..()
+	if(prob(5))
+		new /obj/effect/decal/straw/light(get_turf(src))
+		playsound(src, grass_sound, 30, 2)
+
+/obj/structure/bed/strawnest/Crossed(atom/movable/AM, oldloc)
+	var/grass_sound = pick('sound/effects/footstep/grass1.ogg', 'sound/effects/footstep/grass2.ogg', 'sound/effects/footstep/grass3.ogg', 'sound/effects/footstep/grass4.ogg')
+	playsound(src, grass_sound, 30, 2)
 
 /*
  * Roller beds

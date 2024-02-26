@@ -1413,3 +1413,10 @@
 	reqs = list(/obj/item/stack/sheet/glass = 3)
 	tools = list(TOOL_WELDER, TOOL_SCREWDRIVER)
 	category = CAT_MISC
+
+/datum/crafting_recipe/strawnest
+	name = "Straw nest"
+	result = /obj/structure/bed/strawnest
+	time = 10 SECONDS
+	reqs = list(/obj/item/reagent_containers/food/snacks/grown/wheat = 10)
+	category = CAT_PRIMAL

@@ -462,3 +462,37 @@
 	anchored = TRUE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	density = 0
+
+/obj/item/decorations/distillator
+	max_integrity = 20
+	name = "distillator"
+	desc = "Some chemical equipment seems to be missing something."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "distill"
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/decorations/distillator/Destroy()
+	playsound(src, 'sound/effects/glassbr3.ogg', 30, 0)
+	new /obj/effect/decal/cleanable/glass get_turf(src)
+	new /obj/item/shard get_turf(src)
+	..()
+
+/obj/item/decorations/distillator/full
+	name = "distillator"
+	desc = "Some chemical equipment looks like something was evaporated through it. It's better not to smell it."
+	icon_state = "distill_nocol"
+
+/obj/structure/decorative_structures/centrifuge
+	name = "centrifuge"
+	desc = "Broken centrifuge. It's better not to touch it, who knows what was mixed inside it."
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "centrifuge"
+	max_integrity = 50
+	anchored = 1
+	density = 0
+
+/obj/structure/decorative_structures/centrifuge/Destroy()
+	new /obj/effect/decal/cleanable/glass get_turf(src)
+	new /obj/effect/decal/cleanable/ash get_turf(src)
+	new /obj/item/shard get_turf(src)
+	..()
