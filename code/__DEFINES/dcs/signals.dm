@@ -51,7 +51,7 @@
 #define COMSIG_ELEMENT_DETACH "element_detach"
 
 // /atom signals
-///from base of atom/proc/Initialize(): sent any time a new atom is created
+///from base of atom/proc/Initialize(): sent any time a new atom is createded
 #define COMSIG_ATOM_CREATED "atom_created"
 //from SSatoms InitAtom - Only if the  atom was not deleted or failed initialization
 #define COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZE "atom_init_success"
@@ -874,3 +874,6 @@
 	#define COMPONENT_SCANNED_CRITICAL (1<<2)
 	/// There are no servers available
 	#define COMPONENT_SCANNED_NO_SERVERS (1<<3)
+
+/// Organs signals
+#define COMSIG_EXTERNAL_ORGAN_REMOVED "external_organ_removed"
