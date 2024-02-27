@@ -473,8 +473,8 @@
 
 /obj/item/decorations/distillator/Destroy()
 	playsound(src, 'sound/effects/glassbr3.ogg', 30, 0)
-	new /obj/effect/decal/cleanable/glass get_turf(src)
-	new /obj/item/shard get_turf(src)
+	new /obj/effect/decal/cleanable/glass(get_turf(src))
+	new /obj/item/shard(get_turf(src))
 	..()
 
 /obj/item/decorations/distillator/full
@@ -492,7 +492,7 @@
 	density = 0
 
 /obj/structure/decorative_structures/centrifuge/Destroy()
-	new /obj/effect/decal/cleanable/glass get_turf(src)
-	new /obj/effect/decal/cleanable/ash get_turf(src)
-	new /obj/item/shard get_turf(src)
+	new /obj/effect/decal/cleanable/glass(get_turf(src))
+	new /obj/effect/decal/cleanable/ash(get_turf(src))
+	new /obj/item/shard(get_turf(src))
 	..()
