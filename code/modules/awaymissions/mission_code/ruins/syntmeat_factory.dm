@@ -9,7 +9,7 @@
 	var/battle = FALSE
 	var/cooldown = FALSE
 	var/list/naughty_mobs
-	var/mob/living/simple_animal/hostile/derp_mob/boss
+	var/mob/living/simple_animal/hostile/skinner/boss
 
 /area/ruin/space/syntmeat_factory/entrence
 	name = "Entrence"
@@ -30,19 +30,10 @@
 	var/derp_has_fallen = FALSE //remove this?
 	var/safe_faction = list()
 
-
-/area/ruin/space/syntmeat_factory/main_lab/proc/UnlockBlastDoors()
-	if(!battle)
-		return
-	battle = FALSE
-	for(var/obj/machinery/door/poddoor/impassable/preopen/P in GLOB.airlocks)
-		if(P.id_tag == "[name]" && P.density && !P.operating)
-			addtimer(CALLBACK(P, TYPE_PROC_REF(/obj/machinery/door, open)), 3 SECONDS)
-
 /area/ruin/space/syntmeat_factory/main_lab/proc/BlockBlastDoors()
 	if(battle)
 		return
-	for(var/obj/machinery/door/poddoor/impassable/preopen/P in GLOB.airlocks)
+	for(var/obj/machinery/door/poddoor/impassable/P in GLOB.airlocks)
 		if(P.id_tag == "[name]" && !P.density && P.z == z && !P.operating)
 			INVOKE_ASYNC(P, TYPE_PROC_REF(/obj/machinery/door, close))
 	battle = TRUE
@@ -57,12 +48,9 @@
 
 	if(length(naughty_mobs))
 		BlockBlastDoors()
-	else
-		UnlockBlastDoors()
 
 /area/ruin/space/syntmeat_factory/main_lab/Entered(atom/movable/arrived)
 	. = ..()
-
 	if(!boss || boss.is_dead())
 		return
 
@@ -117,8 +105,8 @@
 		UnregisterSignal(living_mob, COMSIG_MOB_DEATH)
 		return TRUE
 
-/mob/living/simple_animal/hostile/derp_mob
-	name = "Santa Derp"
+/mob/living/simple_animal/hostile/skinner
+	name = "Skinner"
 	icon = 'icons/mob/winter_mob.dmi'
 	icon_state = "placeholder"
 	icon_living = "placeholder"
@@ -126,7 +114,7 @@
 	faction = list("hostile", "syndicate", "derp")
 	speak_chance = 0
 	turns_per_move = 5
-	speed = 1
+	speed = 0
 	maxHealth = 150		//if this seems low for a "boss", it's because you have to fight him multiple times, with him fully healing between stages
 	health = 150
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
@@ -140,13 +128,13 @@
 	var/death_message
 	var/area/ruin/space/syntmeat_factory/main_lab/bossfight_area
 
-/mob/living/simple_animal/hostile/derp_mob/Initialize(mapload)
+/mob/living/simple_animal/hostile/skinner/Initialize(mapload)
 	. = ..()
 	bossfight_area = get_area(src)
 	if(istype(bossfight_area))
 		bossfight_area.boss = src
 
-/mob/living/simple_animal/hostile/derp_mob/death(gibbed)
+/mob/living/simple_animal/hostile/skinner/death(gibbed)
 	. = ..(gibbed)
 	if(!.)
 		return FALSE // Only execute the below if we successfully died
@@ -159,66 +147,43 @@
 				qdel(src)
 			bossfight_area.ready_or_not()
 	else
+		gib(src)
 		bossfight_area.ready_or_not()
 
-/mob/living/simple_animal/hostile/derp_mob/stage_1		//stage 1: slow melee
-	maxHealth = 150
-	health = 150
+/mob/living/simple_animal/hostile/skinner/stage_1		//stage 1: weak melee
 	desc = "GET THE FAT DERP!"
-	next_stage = /mob/living/simple_animal/hostile/derp_mob/stage_2
+	icon = 'icons/mob/simple_human.dmi'
+	icon_state = "skinner"
+	icon_living = "skinner"
+	icon_dead = "skinner"
+	maxHealth = 50
+	health = 50
+	next_stage = /mob/living/simple_animal/hostile/skinner/stage_2
 	death_message = "<span class='danger'>HO HO HO! YOU THOUGHT IT WOULD BE THIS EASY?!?</span>"
-	speed = 2
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 
-/mob/living/simple_animal/hostile/derp_mob/stage_2		//stage 2: slow ranged
+/mob/living/simple_animal/hostile/skinner/stage_2		//stage 2: strong melee
 	desc = "GET THE FAT DERP AGAIN!"
-	next_stage = /mob/living/simple_animal/hostile/derp_mob/stage_3
+	icon = 'icons/mob/simple_human.dmi'
+	icon_state = "skinner_transform"
+	icon_living = "skinner_transform"
+	icon_dead = "skinner_transform"
 	death_message = "<span class='danger'>YOU'VE BEEN VERY NAUGHTY! PREPARE TO DIE!</span>"
-	maxHealth = 200		//DID YOU REALLY BELIEVE IT WOULD BE THIS EASY!??!!
+	maxHealth = 200		//DID YOU REALLY BELIEVE IT WOULD BE THIS EASY!??!! /// it really easy
 	health = 200
-	ranged = 1
-	projectiletype = /obj/item/projectile/ornament
-	retreat_distance = 5
-	minimum_distance = 5
+	melee_damage_upper = 30
+	sharp_attack = TRUE
+	canmove = FALSE
 
-/mob/living/simple_animal/hostile/derp_mob/stage_3		//stage 3: fast rapidfire ranged
-	desc = "WHY WON'T DERP DIE ALREADY!?" //sorry
-	next_stage = /mob/living/simple_animal/hostile/derp_mob/stage_4
-	death_message = "<span class='danger'>FACE MY FINAL FORM AND KNOW DESPAIR!</span>"
-	maxHealth = 250
-	health = 250
-	ranged = 1
-	rapid = 3
-	speed = 0	//he's lost some weight from the fighting
-	projectiletype = /obj/item/projectile/ornament
-	retreat_distance = 3
-	minimum_distance = 3
-
-/mob/living/simple_animal/hostile/derp_mob/stage_4		//stage 4: fast spinebreaker
-	name = "Final Form DERP"
-	desc = "WHAT THE HELL IS DERP!?! WHY WON'T DERP STAY DEAD!?!" //sorry again derp
-	maxHealth = 250
-	health = 250
-	speed = 0	//he's lost some weight from the fighting
-
-	environment_smash = 2		//naughty walls must be punished too
-	melee_damage_lower = 20
-	melee_damage_upper = 30		//that's gonna leave a mark, for sure
-
-/mob/living/simple_animal/hostile/derp_mob/stage_4/death(gibbed)
+/mob/living/simple_animal/hostile/skinner/stage_2/Initialize(mapload)
 	. = ..()
-	if(!.)
-		return FALSE
-	to_chat(world, "<span class='notice'><hr></span>") //Миру не стоит как по мне
-	to_chat(world, "<span class='notice'>THE FAT DERP HAS FALLEN!</span>")
-	to_chat(world, "<span class='notice'>SANTA DERP HAS BEEN DEFEATED!</span>")
-	to_chat(world, "<span class='notice'><hr></span>")
-	//derp, remove below, clusterbuster good, but xmas clusterbusters are bad
-	var/obj/item/grenade/clusterbuster/xmas/X = new /obj/item/grenade/clusterbuster/xmas(get_turf(src))
-	var/obj/item/grenade/clusterbuster/xmas/Y = new /obj/item/grenade/clusterbuster/xmas(get_turf(src))
-	X.prime()
-	Y.prime()
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/atom, update_icon), UPDATE_ICON_STATE), 1.5 SECONDS)
+	addtimer(VARSET_CALLBACK(src, canmove, TRUE), 1 SECONDS)
+
+/mob/living/simple_animal/hostile/skinner/stage_2/update_icon_state()
+	icon_state = "skinner_monster"
+	icon_living = "skinner_monster"
 
 /area/ruin/space/syntmeat_factory/self_destruct/Entered(mob/living/bourgeois)
 	. = ..()
