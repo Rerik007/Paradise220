@@ -385,8 +385,9 @@
 	What secrets does the “Church of Salvation” keep and who is buried in its graveyard?"
 	cost = 4
 	allow_duplicates = FALSE
-
+/*
 /datum/map_template/ruin/space/syntmeat_factory
 	id = "syntmeat_factory"
 	suffix = "syntmeat_factory.dmm"
 	name = "syntmeat_factory"
+*/

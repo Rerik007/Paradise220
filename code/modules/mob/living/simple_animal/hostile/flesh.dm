@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/living_limb_flesh
 	name = "living flesh"
 	desc = "A vaguely leg or arm shaped flesh abomination. It pulses, like a heart."
-	icon = 'icons/mob/animal.dmi'
+	icon = 'icons/mob/mob.dmi'
 	icon_state = "limb"
 	icon_living = "limb"
 	melee_damage_lower = 10

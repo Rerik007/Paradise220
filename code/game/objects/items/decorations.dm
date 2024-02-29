@@ -496,3 +496,19 @@
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	new /obj/item/shard(get_turf(src))
 	..()
+
+/obj/structure/decorative_structures/broken_cell
+	name = "broken cell"
+	icon = 'icons/obj/machines/cryogenics.dmi'
+	icon_state = "cell-broken2"
+	max_integrity = 200
+	anchored = TRUE
+	var/goo_color = "#752424"
+
+/obj/structure/decorative_structures/broken_cell/update_overlays()
+	. = ..()
+	. += mutable_appearance(icon, icon_state = "goo2", appearance_flags = RESET_COLOR, color = goo_color)
+
+/obj/structure/decorative_structures/broken_cell/Initialize(mapload)
+	. = ..()
+	update_icon(UPDATE_OVERLAYS)

@@ -105,6 +105,10 @@
 		UnregisterSignal(living_mob, COMSIG_MOB_DEATH)
 		return TRUE
 
+///////////////////////
+////////////// PRINCIPAL SKINNER
+///////////////////////
+
 /mob/living/simple_animal/hostile/skinner
 	name = "Skinner"
 	icon = 'icons/mob/winter_mob.dmi'
@@ -126,6 +130,7 @@
 	melee_damage_upper = 7
 	var/next_stage = null
 	var/death_message
+
 	var/area/ruin/space/syntmeat_factory/main_lab/bossfight_area
 
 /mob/living/simple_animal/hostile/skinner/Initialize(mapload)
@@ -147,6 +152,10 @@
 				qdel(src)
 			bossfight_area.ready_or_not()
 	else
+		new /obj/effect/particle_effect/smoke/vomiting (get_turf(src))
+		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
+		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
+		new /obj/item/nullrod/armblade (get_turf(src))
 		gib(src)
 		bossfight_area.ready_or_not()
 
@@ -184,6 +193,10 @@
 /mob/living/simple_animal/hostile/skinner/stage_2/update_icon_state()
 	icon_state = "skinner_monster"
 	icon_living = "skinner_monster"
+
+///////////////////////
+/////////////////////// SELF DESTRUCT
+///////////////////////
 
 /area/ruin/space/syntmeat_factory/self_destruct/Entered(mob/living/bourgeois)
 	. = ..()
