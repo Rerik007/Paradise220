@@ -130,13 +130,15 @@
 	melee_damage_upper = 7
 	var/next_stage = null
 	var/death_message
+	/// If TRUE you should spawn it only on special area, see bossfight_area
+	var/with_area = TRUE
 
 	var/area/ruin/space/syntmeat_factory/main_lab/bossfight_area
 
 /mob/living/simple_animal/hostile/skinner/Initialize(mapload)
 	. = ..()
-	bossfight_area = get_area(src)
-	if(istype(bossfight_area))
+	if(with_area)
+		bossfight_area = get_area(src)
 		bossfight_area.boss = src
 
 /mob/living/simple_animal/hostile/skinner/death(gibbed)
@@ -150,14 +152,14 @@
 			if(!QDELETED(src))
 				new next_stage(get_turf(src))
 				qdel(src)
-			bossfight_area.ready_or_not()
+			bossfight_area?.ready_or_not()
 	else
 		new /obj/effect/particle_effect/smoke/vomiting (get_turf(src))
 		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
 		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
 		new /obj/item/nullrod/armblade (get_turf(src))
 		gib(src)
-		bossfight_area.ready_or_not()
+		bossfight_area?.ready_or_not()
 
 /mob/living/simple_animal/hostile/skinner/stage_1		//stage 1: weak melee
 	desc = "GET THE FAT DERP!"
@@ -172,6 +174,10 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 20
 
+/mob/living/simple_animal/hostile/skinner/stage_1/without_area
+	with_area = FALSE
+	next_stage = /mob/living/simple_animal/hostile/skinner/stage_2/without_area
+
 /mob/living/simple_animal/hostile/skinner/stage_2		//stage 2: strong melee
 	desc = "GET THE FAT DERP AGAIN!"
 	icon = 'icons/mob/simple_human.dmi'
@@ -184,6 +190,9 @@
 	melee_damage_upper = 30
 	sharp_attack = TRUE
 	canmove = FALSE
+
+/mob/living/simple_animal/hostile/skinner/stage_2/without_area
+	with_area = FALSE
 
 /mob/living/simple_animal/hostile/skinner/stage_2/Initialize(mapload)
 	. = ..()
@@ -223,7 +232,7 @@
 /obj/machinery/syndicatebomb/syntmeat/Initialize(mapload) // derp, place it in target area
 	. = ..()
 	var/area/ruin/space/syntmeat_factory/self_destruct/our_area = get_area(src)
-	if(!istype(our_area))
+	if(istype(our_area))
 		our_area.our_bomb = src
 
 /obj/machinery/syndicatebomb/syntmeat/activate()
@@ -239,20 +248,11 @@
 	range_light = 45
 	range_flame = 30
 	admin_log = TRUE
+	ignorecap = TRUE
+	special_deletes = TRUE
 
-/obj/item/bombcore/syntmeat/detonate()
-	if(adminlog)
-		message_admins(adminlog)
-		add_game_logs(adminlog)
-	var/center = get_turf(src)
-	explosion(center, range_heavy, range_medium, range_light, flame_range = range_flame, adminlog = admin_log, ignorecap = 1, cause = fingerprintslast)
-	delete_unnecessary(center)
-	if(istype(loc, /obj/machinery/syndicatebomb))
-		qdel(loc)
-	qdel(src)
-
-/obj/item/bombcore/syntmeat/proc/delete_unnecessary(center)
-	for(var/atom/A in range(35, center))
+/obj/item/bombcore/syntmeat/delete_unnecessary(center)
+	for(var/atom/A as anything in range(35, center))
 		if(isliving(A))
 			var/mob/living/mob = A
 			mob.gib()
@@ -264,7 +264,7 @@
 			qdel(A)
 
 /obj/item/bombcore/syntmeat/defuse()
-	var/obj/item/bombcore/syntmeat/C = loc
+	var/obj/machinery/syndicatebomb/syntmeat/C = loc
 	new /obj/effect/decal/cleanable/ash(get_turf(loc))
 	new /obj/effect/particle_effect/smoke(get_turf(loc))
 	playsound(src, 'sound/effects/empulse.ogg', 80)
