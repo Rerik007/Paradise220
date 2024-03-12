@@ -924,6 +924,11 @@
 	icon_state = "darkgrey"
 	},
 /area/vision_change_area/syntmeat_laboratory/second_lab)
+"fx" = (
+/turf/simulated/wall/shuttle/ricochet{
+	icon = 'icons/turf/walls/shuttle/gray_shuttle_wall.dmi'
+	},
+/area/vision_change_area/syntmeat_laboratory/outside)
 "fy" = (
 /obj/structure/sink{
 	dir = 4;
@@ -1202,7 +1207,9 @@
 /obj/structure/spacepoddoor{
 	dir = 4
 	},
-/obj/machinery/door/poddoor/multi_tile/three_tile_hor,
+/obj/machinery/door/poddoor/multi_tile/three_tile_hor{
+	id_tag = "garage"
+	},
 /turf/simulated/floor/plating,
 /area/vision_change_area/syntmeat_laboratory/entrence)
 "hc" = (
@@ -1541,6 +1548,12 @@
 	},
 /turf/simulated/floor/plasteel/white,
 /area/vision_change_area/syntmeat_laboratory/virology)
+"jo" = (
+/obj/structure/closet/emcloset,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/pickaxe/mini,
+/turf/simulated/floor/plating,
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "ju" = (
 /obj/item/grown/bananapeel,
 /turf/simulated/floor/grass,
@@ -2668,6 +2681,9 @@
 	icon_state = "wood-oak-broken5"
 	},
 /area/vision_change_area/syntmeat_laboratory/dorms)
+"rp" = (
+/turf/simulated/floor/plating,
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "rr" = (
 /obj/structure/railing{
 	dir = 1
@@ -2987,6 +3003,18 @@
 /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel,
 /turf/simulated/floor/plasteel/white,
 /area/vision_change_area/syntmeat_laboratory/virology)
+"tw" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood/oil,
+/obj/machinery/door_control{
+	pixel_x = -27;
+	id = "garage";
+	req_access = list(122)
+	},
+/turf/simulated/floor/plasteel{
+	icon_state = "dark"
+	},
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "tC" = (
 /obj/machinery/door/airlock/freezer,
 /turf/simulated/floor/plasteel{
@@ -2994,11 +3022,12 @@
 	},
 /area/vision_change_area/syntmeat_laboratory/kitchen)
 "tE" = (
-/obj/structure/table/reinforced,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/plasteel{
-	icon_state = "dark"
+/obj/machinery/door_control{
+	pixel_x = -27;
+	id = "garage";
+	req_access = list(122)
 	},
+/turf/simulated/floor/plating/airless,
 /area/vision_change_area/syntmeat_laboratory/entrence)
 "tI" = (
 /turf/simulated/mineral/random/low_chance,
@@ -3060,6 +3089,15 @@
 	icon_state = "darkredalt"
 	},
 /area/vision_change_area/syntmeat_laboratory/dorms)
+"ug" = (
+/obj/structure/fans/tiny,
+/obj/machinery/door/airlock/highsecurity{
+	req_access = list(122);
+	locked = 1;
+	name = "external airlock"
+	},
+/turf/simulated/floor/plating/airless,
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "uh" = (
 /obj/machinery/door/firedoor/border_only/closed,
 /obj/effect/decal/cleanable/dirt,
@@ -3160,6 +3198,12 @@
 	icon_state = "white"
 	},
 /area/vision_change_area/syntmeat_laboratory/virology)
+"uM" = (
+/obj/structure/table/reinforced,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/storage/box/flare,
+/turf/simulated/floor/plating,
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "uO" = (
 /obj/effect/decal/cleanable/dust,
 /obj/structure/chair/wood{
@@ -6987,8 +7031,13 @@
 	},
 /area/vision_change_area/syntmeat_laboratory/virology)
 "UE" = (
-/obj/structure/reagent_dispensers/fueltank,
 /obj/effect/decal/cleanable/dirt,
+/obj/structure/closet,
+/obj/item/reagent_containers/food/drinks/oilcan/full,
+/obj/item/stack/sheet/metal{
+	amount = 20
+	},
+/obj/item/stack/cable_coil/orange,
 /obj/effect/decal/cleanable/cobweb,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
@@ -7108,9 +7157,8 @@
 	},
 /area/vision_change_area/syntmeat_laboratory/entrence)
 "Vk" = (
-/obj/structure/table/reinforced,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/cable_coil/orange,
+/obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/plasteel{
 	icon_state = "dark"
 	},
@@ -7455,6 +7503,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/simulated/floor/plating,
 /area/vision_change_area/syntmeat_laboratory/dorms)
+"XB" = (
+/obj/machinery/door/airlock/external/glass,
+/turf/simulated/floor/plating,
+/area/vision_change_area/syntmeat_laboratory/entrence)
 "XC" = (
 /obj/item/reagent_containers/dropper/precision,
 /obj/item/reagent_containers/glass/beaker/vial,
@@ -7565,15 +7617,10 @@
 	},
 /area/vision_change_area/syntmeat_laboratory/second_lab)
 "Yf" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/closet,
-/obj/item/reagent_containers/food/drinks/oilcan/full,
-/obj/item/stack/sheet/metal{
-	amount = 20
+/obj/machinery/door/airlock/external/glass{
+	req_access = list(122)
 	},
-/turf/simulated/floor/plasteel{
-	icon_state = "dark"
-	},
+/turf/simulated/floor/plating,
 /area/vision_change_area/syntmeat_laboratory/entrence)
 "Yg" = (
 /obj/structure/punching_bag/floor,
@@ -12291,8 +12338,8 @@ Lw
 NT
 NT
 Lw
-Lw
-Lw
+NT
+NT
 NT
 NT
 NT
@@ -12394,8 +12441,8 @@ Lw
 Lw
 Lw
 Lw
-Lw
-Lw
+NT
+NT
 NT
 NT
 fj
@@ -12497,7 +12544,7 @@ Lw
 Lw
 Lw
 Lw
-Lw
+NT
 NT
 NT
 fj
@@ -12599,7 +12646,7 @@ wN
 qw
 qw
 wN
-Lw
+NT
 NT
 NT
 fj
@@ -12904,7 +12951,7 @@ EA
 Pt
 ld
 ag
-zz
+Sb
 qw
 NT
 NT
@@ -13108,9 +13155,9 @@ ld
 eR
 XF
 mv
-wq
+tw
 hb
-uG
+tE
 fj
 fj
 fj
@@ -13516,7 +13563,7 @@ gA
 sc
 xs
 ld
-tE
+zz
 qw
 NT
 NT
@@ -13717,12 +13764,12 @@ Lw
 Lw
 wN
 qw
-wN
-Sb
-Yf
-wN
 qw
-NT
+XB
+Yf
+qw
+qw
+qw
 NT
 fj
 fj
@@ -13819,13 +13866,13 @@ Lw
 Lw
 Lw
 Lw
-wN
 qw
-qw
-wN
-Lw
-NT
-NT
+xs
+xs
+xs
+ug
+rp
+fj
 fj
 fj
 UV
@@ -13921,13 +13968,13 @@ Lw
 Lw
 Lw
 Lw
-Lw
-Lw
-Lw
-Lw
-Lw
-NT
-NT
+qw
+xs
+xs
+xs
+ug
+rp
+fj
 fj
 fj
 UV
@@ -14023,12 +14070,12 @@ Lw
 NT
 NT
 Lw
-Lw
-Lw
-Lw
-Lw
-Lw
-NT
+wN
+qw
+uM
+jo
+qw
+qw
 NT
 fj
 fj
@@ -14126,10 +14173,10 @@ NT
 Lw
 Lw
 Lw
-Lw
-Lw
-NT
-NT
+fx
+fx
+fx
+fx
 NT
 NT
 NT
@@ -14636,8 +14683,8 @@ Lw
 NT
 NT
 NT
-fj
-fj
+NT
+NT
 fj
 fj
 fj
