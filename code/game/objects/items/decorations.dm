@@ -287,6 +287,14 @@
 	desc = "Praise be to lady Tesla!"
 	icon_state = "tesla_monument"
 
+/obj/structure/decorative_structures/metal/repeater
+	name = "broken machine"
+	desc = "Похоже именно этот аппарат и создаёт помехи. Он безвозвратно сломан."
+	icon = 'icons/obj/machines/repeater.dmi'
+	icon_state = "repeater-broken"
+	anchored = TRUE
+	max_integrity = 200
+
 
 /obj/structure/decorative_structures/flammable
 	resistance_flags = FLAMMABLE

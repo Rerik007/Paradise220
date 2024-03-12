@@ -97,6 +97,20 @@
 /turf/simulated/floor/wood/fancy/light/broken_states()
 	return list("light-fancy-wood-broken", "light-fancy-wood-broken2", "light-fancy-wood-broken3", "light-fancy-wood-broken4", "light-fancy-wood-broken5", "light-fancy-wood-broken6", "light-fancy-wood-broken7")
 
+/turf/simulated/floor/wood/fancy/parquet
+	icon_state = "wood-parquet"
+	floor_tile = /obj/item/stack/tile/wood/fancy/parquet
+
+/turf/simulated/floor/wood/fancy/parquet/broken_states()
+	return list("wood-parquet-broken", "wood-parquet-broken2", "wood-parquet-broken3", "wood-parquet-broken4", "wood-parquet-broken5", "wood-parquet-broken6", "wood-parquet-broken7")
+
+/turf/simulated/floor/wood/fancy/parquet_square
+	icon_state = "wood-parquet-square"
+	floor_tile = /obj/item/stack/tile/wood/fancy/parquet_square
+
+/turf/simulated/floor/wood/fancy/parquet_square/broken_states()
+	return list("wood-parquet-square-broken", "wood-parquet-square-broken2", "wood-parquet-square-broken3", "wood-parquet-square-broken4")
+
 // GRASS
 /turf/simulated/floor/grass
 	name = "grass patch"

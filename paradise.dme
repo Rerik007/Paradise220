@@ -1673,7 +1673,7 @@
 #include "code\modules\awaymissions\mission_code\ruins\graveyard.dm"
 #include "code\modules\awaymissions\mission_code\ruins\oldstation.dm"
 #include "code\modules\awaymissions\mission_code\ruins\spacehotelv1.dm"
-#include "code\modules\awaymissions\mission_code\ruins\syntmeat_factory.dm"
+#include "code\modules\awaymissions\mission_code\ruins\syntmeat_laboratory.dm"
 #include "code\modules\awaymissions\mission_code\ruins\USSP_gorky17.dm"
 #include "code\modules\awaymissions\mission_code\ruins\ussplaboratory.dm"
 #include "code\modules\awaymissions\mission_code\ruins\wizardcrash.dm"

@@ -1,36 +1,91 @@
-/area/ruin/space/syntmeat_factory
+/area/vision_change_area/syntmeat_laboratory
 	poweralm = FALSE
 	report_alerts = FALSE
 	requires_power = TRUE
+	has_gravity = TRUE
+	there_can_be_many = TRUE
+	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
+	sound_environment = SOUND_ENVIRONMENT_STONEROOM
+	ambientsounds = list('sound/ambience/spooky/chill.ogg',\
+						'sound/ambience/spooky/angels.ogg',\
+						'sound/ambience/spooky/clank1.ogg',\
+						'sound/ambience/spooky/decafinatd.ogg',\
+						'sound/ambience/spooky/distantclank1.ogg',\
+						'sound/ambience/spooky/groan3.ogg',\
+						'sound/ambience/spooky/groan2.ogg',\
+						'sound/ambience/spooky/metaldoor2.ogg',\
+						'sound/ambience/spooky/metaldoor1.ogg',\
+						'sound/ambience/spooky/howled_4.ogg',\
+						'sound/ambience/spooky/ugrnd_ambient_banging_1.ogg',\
+						'sound/ambience/spooky/ugrnd_ambient_banging_2.ogg',\
+						'sound/ambience/spooky/ugrnd_drip_3.ogg',\
+						'sound/ambience/spooky/ugrnd_drip_4.ogg',\
+						'sound/ambience/spooky/ugrnd_drip_5.ogg',\
+						'sound/ambience/spooky/ugrnd_drip_6.ogg',\
+						'sound/ambience/spooky/ugrnd_drip_7.ogg')
 
-/area/ruin/space/syntmeat_factory/main_lab
-	name = "Main lab"
+/area/ruin/space/test ////////////////////////////не забыть удалить
+	name = "Test area"
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+
+
+/area/vision_change_area/syntmeat_laboratory/main_lab
+	name = "Main laboratory"
 	icon_state = "away1"
 	var/battle = FALSE
 	var/cooldown = FALSE
 	var/list/naughty_mobs
 	var/mob/living/simple_animal/hostile/skinner/boss
 
-/area/ruin/space/syntmeat_factory/entrence
+/area/vision_change_area/syntmeat_laboratory/entrence
 	name = "Entrence"
 	icon_state = "away2"
 
-/area/ruin/space/syntmeat_factory/kitchen
+/area/vision_change_area/syntmeat_laboratory/kitchen
 	name = "Kitchen"
 	icon_state = "away3"
 
-/area/ruin/space/syntmeat_factory/dorms
+/area/vision_change_area/syntmeat_laboratory/dorms
 	name = "Dorms"
 	icon_state = "away4"
 
-/area/ruin/space/syntmeat_factory/self_destruct
-	name = "Self destruct"
+/area/vision_change_area/syntmeat_laboratory/check_point
+	name = "Check point"
 	icon_state = "away5"
+
+/area/vision_change_area/syntmeat_laboratory/virology
+	name = "Virology"
+	icon_state = "away6"
+
+/area/vision_change_area/syntmeat_laboratory/second_lab
+	name = "Second laboratory"
+	icon_state = "away7"
+
+/area/vision_change_area/syntmeat_laboratory/maintenance
+	name = "Maintenance"
+	icon_state = "away8"
+
+/area/vision_change_area/syntmeat_laboratory/outside
+	name = "Outside"
+	icon_state = "away9"
+	has_gravity = FALSE
+	ambientsounds = list('sound/ambience/spooky/bass_ambience.ogg')
+
+/area/vision_change_area/syntmeat_laboratory/near_asteroid
+	name = "Space near the asteroid"
+	icon_state = "away10"
+	has_gravity = FALSE
+	ambientsounds = list('sound/ambience/spooky/dark_ambient_ eerie.ogg',\
+						'sound/ambience/spooky/deep_ominous_drone.ogg')
+
+/area/vision_change_area/syntmeat_laboratory/self_destruct
+	name = "Self destruct"
+	icon_state = "away11"
 	var/obj/machinery/syndicatebomb/our_bomb
 	var/derp_has_fallen = FALSE //remove this?
 	var/safe_faction = list()
 
-/area/ruin/space/syntmeat_factory/main_lab/proc/BlockBlastDoors()
+/area/vision_change_area/syntmeat_laboratory/main_lab/proc/BlockBlastDoors()
 	if(battle)
 		return
 	for(var/obj/machinery/door/poddoor/impassable/P in GLOB.airlocks)
@@ -40,7 +95,7 @@
 	for(var/mob/trapped_one as anything in naughty_mobs)
 		to_chat(trapped_one, span_danger("НЕ ЗНАЮ ЧТО ТУТ БУДЕТ НАПИСАНО НО ЯВНО ЧТО-ТО БУДЕТ!!!!"))
 
-/area/ruin/space/syntmeat_factory/main_lab/proc/ready_or_not()
+/area/vision_change_area/syntmeat_laboratory/main_lab/proc/ready_or_not()
 	SIGNAL_HANDLER
 	for(var/mob/living/naughty as anything in naughty_mobs)
 		if(naughty.is_dead() || !boss || boss.is_dead() || !naughty.mind)
@@ -49,7 +104,7 @@
 	if(length(naughty_mobs))
 		BlockBlastDoors()
 
-/area/ruin/space/syntmeat_factory/main_lab/Entered(atom/movable/arrived)
+/area/vision_change_area/syntmeat_laboratory/main_lab/Entered(atom/movable/arrived)
 	. = ..()
 	if(!boss || boss.is_dead())
 		return
@@ -72,7 +127,7 @@
 	addtimer(VARSET_CALLBACK(src, cooldown, FALSE), 5 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(ready_or_not)), 4 SECONDS, TIMER_UNIQUE)
 
-/area/ruin/space/syntmeat_factory/main_lab/Exited(atom/movable/departed)
+/area/vision_change_area/syntmeat_laboratory/main_lab/Exited(atom/movable/departed)
 	. = ..()
 	if(!boss || boss.is_dead())
 		return
@@ -88,7 +143,7 @@
 
 	remove_from_naughty(living_mob)
 
-/area/ruin/space/syntmeat_factory/main_lab/proc/add_to_naughty(mob/living/living_mob)
+/area/vision_change_area/syntmeat_laboratory/main_lab/proc/add_to_naughty(mob/living/living_mob)
 	if(!istype(living_mob))
 		return FALSE
 	if(!living_mob.mind || living_mob.is_dead())
@@ -97,7 +152,7 @@
 	RegisterSignal(living_mob, COMSIG_MOB_DEATH, PROC_REF(ready_or_not))
 	return TRUE
 
-/area/ruin/space/syntmeat_factory/main_lab/proc/remove_from_naughty(mob/living/living_mob)
+/area/vision_change_area/syntmeat_laboratory/main_lab/proc/remove_from_naughty(mob/living/living_mob)
 	if(!istype(living_mob))
 		return FALSE
 	if(living_mob in naughty_mobs)
@@ -115,7 +170,7 @@
 	icon_state = "placeholder"
 	icon_living = "placeholder"
 	icon_dead = "placeholder"
-	faction = list("hostile", "syndicate", "derp")
+	faction = list("hostile", "undead")
 	speak_chance = 0
 	turns_per_move = 5
 	speed = 0
@@ -133,7 +188,7 @@
 	/// If TRUE you should spawn it only on special area, see bossfight_area
 	var/with_area = TRUE
 
-	var/area/ruin/space/syntmeat_factory/main_lab/bossfight_area
+	var/area/vision_change_area/syntmeat_laboratory/main_lab/bossfight_area
 
 /mob/living/simple_animal/hostile/skinner/Initialize(mapload)
 	. = ..()
@@ -157,6 +212,8 @@
 		new /obj/effect/particle_effect/smoke/vomiting (get_turf(src))
 		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
 		new /mob/living/simple_animal/hostile/living_limb_flesh (get_turf(src))
+		new /obj/item/reagent_containers/food/snacks/monstermeat/rotten/jumping (get_turf(src))
+		new /obj/item/reagent_containers/food/snacks/monstermeat/rotten/jumping (get_turf(src))
 		new /obj/item/nullrod/armblade (get_turf(src))
 		gib(src)
 		bossfight_area?.ready_or_not()
@@ -204,10 +261,42 @@
 	icon_living = "skinner_monster"
 
 ///////////////////////
-/////////////////////// SELF DESTRUCT
+////////////// SYNT MEAT MONKEY
 ///////////////////////
 
-/area/ruin/space/syntmeat_factory/self_destruct/Entered(mob/living/bourgeois)
+/mob/living/simple_animal/hostile/syntmeat_monkey
+	name = "\improper meat boy"
+	desc = "As tasty as normal cow."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "stok_old"
+	icon_living = "stok_old"
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/syntiflesh = 4)
+	response_help  = "pets the"
+	response_disarm = "gently pushes aside the"
+	response_harm   = "kicks the"
+	attacktext = "царапает"
+	death_sound = 'sound/goonstation/voice/monkey_scream.ogg'
+	tts_seed = "Bounty"
+	speak_chance = 2
+	speak = list("Baaa!","ROOOOAAA RAAA!","Hee-haw.")
+	speak_emote = list("screams","roars")
+	emote_hear = list("screams")
+	emote_see = list("scratches itself","waving its paws")
+	health = 35
+	maxHealth = 35
+	flip_on_death = TRUE
+	retaliate_only = TRUE
+	melee_damage_lower = 7
+	melee_damage_upper = 12
+
+/mob/living/simple_animal/hostile/syntmeat_monkey/proc/get_random_name()
+	return "[lowertext(name)] ([rand(100,999)])"
+
+///////////////////////
+////////////// SELF DESTRUCT
+///////////////////////
+
+/area/vision_change_area/syntmeat_laboratory/self_destruct/Entered(mob/living/bourgeois)
 	. = ..()
 	if(!derp_has_fallen && istype(bourgeois) && !faction_check(bourgeois.faction, safe_faction))
 		derp_has_fallen = TRUE
@@ -220,9 +309,11 @@
 
 /obj/machinery/syndicatebomb/syntmeat
 	name = "self destruct device"
-	desc = "High explosive. Don't touch."
-	minimum_timer = 17 // why 17, derp?
-	timer_set = 17
+	desc = "High explosive. Don't touch." ///// звук для сирены 'sound/effects/alarm_30sec.ogg'
+	icon = 'icons/obj/machines/nuke_terminal.dmi'
+	icon_state = "nuclearbomb_hatch"
+	minimum_timer = 30
+	timer_set = 30
 	payload = /obj/item/bombcore/syntmeat
 	can_unanchor = FALSE
 	anchored = TRUE
@@ -231,7 +322,7 @@
 
 /obj/machinery/syndicatebomb/syntmeat/Initialize(mapload) // derp, place it in target area
 	. = ..()
-	var/area/ruin/space/syntmeat_factory/self_destruct/our_area = get_area(src)
+	var/area/vision_change_area/syntmeat_laboratory/self_destruct/our_area = get_area(src)
 	if(istype(our_area))
 		our_area.our_bomb = src
 
@@ -269,3 +360,48 @@
 	new /obj/effect/particle_effect/smoke(get_turf(loc))
 	playsound(src, 'sound/effects/empulse.ogg', 80)
 	qdel(C)
+
+///////////////////////
+////////////// CHEMICALS
+///////////////////////
+
+/*
+/datum/chemical_reaction/syntiflesh2
+	name = "Syntiflesh 2.0"
+	id = "syntiflesh2"
+	result = null
+	required_reagents = list("blood" = 5, "meatocreatadone" = 5)
+	result_amount = 1
+
+/datum/chemical_reaction/syntiflesh2/on_reaction(datum/reagents/holder, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
+
+/datum/chemical_reaction/livingflesh
+	name = "Living flesh"
+	id = "livingflesh"
+	result = null
+	required_reagents = list("mutagen" = 25, "meatocreatadone" = 25)   ////// мутаген надо нагреть до максимума
+	result_amount = 1
+
+/datum/chemical_reaction/livingflesh/on_reaction(datum/reagents/holder, created_volume)
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /mob/living/simple_animal/hostile/living_limb_flesh(location)
+
+
+/datum/reagent/medicine/meatocreatadone
+	data = list("diseases" = null)
+	name = "Meatocreatadone"
+	id = "meatocreatadone"
+	description = "A plasma mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 265K for it to metabolise correctly."
+	reagent_state = LIQUID
+	color = "#4e0303" // rgb: 200, 165, 220
+	taste_description = "bitterness"
+	can_synth = FALSE
+	heart_rate_stop = 0
+
+/obj/item/reagent_containers/glass/beaker/large/meatocreatadone
+	list_reagents = list("meatocreatadone" = 100)
+*/
