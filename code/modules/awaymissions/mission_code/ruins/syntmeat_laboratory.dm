@@ -307,6 +307,12 @@
 			if(propaganda.z == our_bomb.z && get_dist(get_turf(our_bomb), propaganda) < 50)
 				playsound(propaganda, 'sound/effects/self_destruct_17sec.ogg', 100)
 
+
+#define NONACTIVE_STATE "hatch"
+#define ACTIVATING_STATE "unfloored"
+#define DEACTIVATING_STATE "floored"
+#define IDLE_STATE "base"
+
 /obj/machinery/syndicatebomb/syntmeat
 	name = "self destruct device"
 	desc = "High explosive. Don't touch." ///// звук для сирены 'sound/effects/alarm_30sec.ogg'
@@ -319,6 +325,7 @@
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	invisibility = INVISIBILITY_ABSTRACT
+	var/activate_state = null
 
 /obj/machinery/syndicatebomb/syntmeat/Initialize(mapload) // derp, place it in target area
 	. = ..()
@@ -329,9 +336,33 @@
 /obj/machinery/syndicatebomb/syntmeat/activate()
 	. = ..()
 	invisibility = 0
-	alpha = 0
-	animate(src, 2 SECONDS, alpha = 255)
-	// анимации появления тут. 2 строчки выше делают чтобы она становилось чёткой в 2 секунды, удалить наверное.
+	animate_on()
+
+/obj/machinery/syndicatebomb/syntmeat/proc/animate_on()
+	sleep(2 SECONDS)
+	activate_state = ACTIVATING_STATE
+	update_icon(UPDATE_ICON_STATE)
+	sleep(3 SECONDS)
+	activate_state = IDLE_STATE
+	update_icon(UPDATE_ICON_STATE)
+
+/obj/machinery/syndicatebomb/syntmeat/proc/animate_off()
+	sleep(2 SECONDS)
+	activate_state = DEACTIVATING_STATE
+	update_icon(UPDATE_ICON_STATE)
+	sleep(3 SECONDS)
+	activate_state = NONACTIVE_STATE
+	update_icon(UPDATE_ICON_STATE)
+
+
+/obj/machinery/syndicatebomb/syntmeat/update_icon_state()
+	if(activate_state)
+		icon_state = "nuclearbomb_[activate_state]"
+
+#undef NONACTIVE_STATE
+#undef ACTIVATING_STATE
+#undef DEACTIVATING_STATE
+#undef IDLE_STATE
 
 /obj/item/bombcore/syntmeat
 	range_heavy = 20
@@ -356,16 +387,16 @@
 
 /obj/item/bombcore/syntmeat/defuse()
 	var/obj/machinery/syndicatebomb/syntmeat/C = loc
+	C.animate_off()
 	new /obj/effect/decal/cleanable/ash(get_turf(loc))
 	new /obj/effect/particle_effect/smoke(get_turf(loc))
 	playsound(src, 'sound/effects/empulse.ogg', 80)
-	qdel(C)
 
 ///////////////////////
 ////////////// CHEMICALS
 ///////////////////////
 
-/*
+
 /datum/chemical_reaction/syntiflesh2
 	name = "Syntiflesh 2.0"
 	id = "syntiflesh2"
@@ -375,19 +406,20 @@
 
 /datum/chemical_reaction/syntiflesh2/on_reaction(datum/reagents/holder, created_volume)
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for(var/i in 1 to created_volume)
 		new /obj/item/reagent_containers/food/snacks/meat/syntiflesh(location)
 
 /datum/chemical_reaction/livingflesh
 	name = "Living flesh"
 	id = "livingflesh"
+	min_temp = 1000
 	result = null
 	required_reagents = list("mutagen" = 25, "meatocreatadone" = 25)   ////// мутаген надо нагреть до максимума
 	result_amount = 1
 
 /datum/chemical_reaction/livingflesh/on_reaction(datum/reagents/holder, created_volume)
 	var/location = get_turf(holder.my_atom)
-	for(var/i = 1, i <= created_volume, i++)
+	for(var/i in 1 to created_volume)
 		new /mob/living/simple_animal/hostile/living_limb_flesh(location)
 
 
@@ -404,4 +436,21 @@
 
 /obj/item/reagent_containers/glass/beaker/large/meatocreatadone
 	list_reagents = list("meatocreatadone" = 100)
-*/
+
+
+/obj/effect/mustard
+	name = "cloud of gas"
+	icon_state = "mustard"
+	layer = ABOVE_MOB_LAYER
+
+/obj/effect/mustard/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/caltrop/virus, probability = 10, flags = CALTROP_BYPASS_WALKERS, virus_type = /datum/disease/virus/cadaver)
+
+/obj/effect/mustard/is_cleanable()
+	if(!QDELETED(src))
+		return TRUE
+
+/obj/effect/mustard/water_act(volume, temperature, source, method)
+	. = ..()
+	qdel(src)

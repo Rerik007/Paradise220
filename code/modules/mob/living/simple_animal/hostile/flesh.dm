@@ -31,12 +31,12 @@
 	if(isnull(current_bodypart) || isnull(current_bodypart.owner))
 		return
 	var/mob/living/carbon/human/victim = current_bodypart.owner
-	if(prob(SPT_PROB(3, 2)))
+	if(SPT_PROB(3, 2))
 		to_chat(victim, span_warning("The thing posing as your limb makes you feel funny...")) //warn em
 	//firstly as a sideeffect we drain nutrition from our host
 	victim.adjust_nutrition(-1.5)
 
-	if(!prob(SPT_PROB(1.5, 2)))
+	if(!SPT_PROB(1.5, 2))
 		return
 
 	if(istype(current_bodypart, /obj/item/organ/external/arm))

@@ -326,8 +326,8 @@
 	var/bloodtiles = 8  // number of tiles with blood while pulling
 
 /obj/structure/decorative_structures/corpse/Initialize()
-	START_PROCESSING(SSobj, src)
-	..()
+	. = ..()
+	AddComponent(/datum/component/proximity_monitor/dead_corpse_structure, _radius = 4)
 
 /obj/structure/decorative_structures/corpse/Destroy()
 	playsound(src, 'sound/goonstation/effects/gib.ogg', 30, 0)
@@ -338,7 +338,6 @@
 	new /obj/item/reagent_containers/food/snacks/monstermeat/rotten/jumping(T)
 	new /obj/effect/decal/cleanable/blood/gibs(T)
 	new /obj/effect/decal/cleanable/blood(T)
-	STOP_PROCESSING(SSobj, src)
 	..()
 
 /obj/structure/decorative_structures/corpse/attack_hand(mob/living/user)
@@ -358,16 +357,27 @@
 	if(bloodtiles >= 0 && prob(40))
 		new /obj/effect/decal/cleanable/blood(get_turf(src))
 
-/obj/structure/decorative_structures/corpse/process()
-	for(var/mob/living/carbon/human/H in range(4, src))
-		if(prob(15))
-			var/obj/item/clothing/mask/M = H.wear_mask
-			if(M && (M.flags_cover & MASKCOVERSMOUTH))
-				continue
-			if(NO_BREATHE in H.dna.species.species_traits)
-				continue //no puking if you can't smell!
-			to_chat(H, "<span class='warning'>You smell something foul...</span>")
-			H.fakevomit()
+/datum/component/proximity_monitor/dead_corpse_structure
+	field_checker_type = /obj/effect/abstract/proximity_checker/dead_corpse_structure
+
+/obj/effect/abstract/proximity_checker/dead_corpse_structure/Crossed(atom/movable/AM, oldloc)
+	. = ..()
+	if(!ishuman(AM))
+		return
+	var/mob/living/carbon/human/cross_human = AM
+	if(prob(5))
+		var/obj/item/clothing/mask/M = cross_human.wear_mask
+		if(M && (M.flags_cover & MASKCOVERSMOUTH))
+			return
+		if(NO_BREATHE in cross_human.dna.species.species_traits)
+			return //no puking if you can't smell!
+		to_chat(cross_human, span_warning("You smell something foul..."))
+		cross_human.fakevomit()
+		return
+
+	if(prob(1))
+		var/datum/disease/virus/cadaver/D = new()
+		D.Contract(cross_human, CONTACT|AIRBORNE, need_protection_check = TRUE)
 
 ///// jumping meat for body explotion effect
 
@@ -386,12 +396,15 @@
 		for(var/mob/living/carbon/M in range(2,src))
 			smoke_mob(M)
 
-/obj/effect/particle_effect/smoke/vomiting/smoke_mob(mob/living/carbon/M)
-	if(..())
-		M.drop_from_active_hand()
-		M.vomit()
-		M.emote("cough")
-		return 1
+/obj/effect/particle_effect/smoke/vomiting/smoke_mob(mob/living/carbon/carbon_mob)
+	. = ..()
+	if(!.)
+		return
+	carbon_mob.drop_from_active_hand()
+	carbon_mob.vomit()
+	carbon_mob.emote("cough")
+	return TRUE
+
 /datum/effect_system/smoke_spread/vomiting
 	effect_type = /obj/effect/particle_effect/smoke/vomiting
 
