@@ -1,3 +1,7 @@
+#define NUTRITION_SUCK_RATE 1
+#define BLOOD_SUCK_RATE 2
+#define SPLIT_BORDER_BLOOD 300
+
 /mob/living/simple_animal/hostile/living_limb_flesh
 	name = "living flesh"
 	desc = "A vaguely leg or arm shaped flesh abomination. It pulses, like a heart."
@@ -10,8 +14,12 @@
 	maxHealth = 20
 	attack_sound = 'sound/weapons/bite.ogg'
 	attacktext = "try to attach to"
-	/// the meat bodypart we are currently inside, used to like drain nutrition and dismember and shit
+	del_on_death = TRUE
+	/// The meat bodypart we are currently inside, used to like drain nutrition and dismember and shit
 	var/obj/item/organ/external/current_bodypart
+	/// The amount of accumulated blood
+	var/collect_blood = 0
+
 
 /mob/living/simple_animal/hostile/living_limb_flesh/Initialize(mapload, obj/item/organ/external/limb)
 	. = ..()
@@ -28,16 +36,25 @@
 	. = ..()
 	if(stat == DEAD)
 		return
+	if(collect_blood >= SPLIT_BORDER_BLOOD)
+		split_flesh()
 	if(isnull(current_bodypart) || isnull(current_bodypart.owner))
 		return
 	var/mob/living/carbon/human/victim = current_bodypart.owner
-	if(SPT_PROB(3, 2))
+	if(SPT_PROB(3, seconds))
 		to_chat(victim, span_warning("The thing posing as your limb makes you feel funny...")) //warn em
 	//firstly as a sideeffect we drain nutrition from our host
-	victim.adjust_nutrition(-1.5)
-
-	if(!SPT_PROB(1.5, 2))
+	victim.adjust_nutrition(-NUTRITION_SUCK_RATE)
+	if(victim.nutrition == 0)
+		detach_self()
 		return
+	victim.blood_volume = max(victim.blood_volume - BLOOD_SUCK_RATE, 0)
+	collect_blood += BLOOD_SUCK_RATE
+
+	if(!SPT_PROB(3, seconds))
+		return
+
+	victim.adjustCloneLoss(1)
 
 	if(istype(current_bodypart, /obj/item/organ/external/arm))
 		var/list/candidates = list()
@@ -56,8 +73,8 @@
 		victim.visible_message(span_warning("[victim][victim.p_s()] [current_bodypart] instinctually starts feeling [candidate]!"))
 		return
 
-	// if(HAS_TRAIT(victim, TRAIT_IMMOBILIZED))
-	// 	return
+	if(victim.IsImmobilized())
+		return
 	step(victim, pick(NORTH, SOUTH, EAST, WEST))
 	to_chat(victim, span_warning("Your [current_bodypart] moves on its own!"))
 
@@ -66,14 +83,18 @@
 	var/mob/living/carbon/human/victim = target
 	if(!istype(victim))
 		return
+	if(!victim.dna || (NO_BLOOD in victim.dna.species.species_traits))
+		return
 	var/list/available_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_ARM, BODY_ZONE_R_LEG)
 	var/list/zone_candidates = list()
 	for(var/bodypart in available_zones)
+		if(!get_location_accessible(victim, bodypart))
+			continue
 		var/obj/item/organ/external/ext_organ = victim.bodyparts_by_name[bodypart]
 		if(ext_organ)
 			if(HAS_TRAIT(ext_organ, TRAIT_IGNORED_BY_LIVING_FLESH))
 				continue
-			if(ext_organ.brute_dam < 20)
+			if(ext_organ.brute_dam < 10)
 				continue
 		zone_candidates.Add(bodypart)
 
@@ -83,7 +104,8 @@
 	var/victim_zone = pick(zone_candidates)
 	var/obj/item/organ/external/victim_part = victim.bodyparts_by_name[victim_zone]
 	if(isnull(victim_part))
-		victim.emote("scream") // dismember already makes them scream so only do this if we aren't doing that
+		if(victim.has_pain())
+			victim.emote("scream") // dismember already makes them scream so only do this if we aren't doing that
 	else
 		victim_part.remove()
 
@@ -154,6 +176,11 @@
 	visible_message(span_warning("[src] begins flailing around!"))
 	Shake(6, 6, 0.5 SECONDS)
 
+/mob/living/simple_animal/hostile/living_limb_flesh/proc/split_flesh()
+	if(current_bodypart?.owner)
+		new /mob/living/simple_animal/hostile/living_limb_flesh(get_turf(current_bodypart.owner))
+	else
+		new /mob/living/simple_animal/hostile/living_limb_flesh(get_turf(src))
 
 ///flesh
 
@@ -181,3 +208,7 @@
 /obj/item/organ/external/leg/right/flesh/Initialize(mapload)
 	. = ..()
 	ADD_TRAIT(src, TRAIT_IGNORED_BY_LIVING_FLESH, "bodypart")
+
+#undef NUTRITION_SUCK_RATE
+#undef BLOOD_SUCK_RATE
+#undef SPLIT_BORDER_BLOOD

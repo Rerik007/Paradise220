@@ -323,12 +323,14 @@
 	icon_state = "deadbody2"
 	density = 0
 	max_integrity = 5
-	var/bloodtiles = 8  // number of tiles with blood while pulling
-	var/virus_type = /datum/disease/virus/cadaver // virus for dead_corpse_structure/Crossed
+	/// number of tiles with blood while pulling
+	var/bloodtiles = 8
+	/// special checker type for virus dead_corpse_structure/Crossed
+	var/field_checker_type = /obj/effect/abstract/proximity_checker/dead_corpse_structure/cadaver
 
 /obj/structure/decorative_structures/corpse/Initialize()
 	. = ..()
-	AddComponent(/datum/component/proximity_monitor/dead_corpse_structure, _radius = 4)
+	AddComponent(/datum/component/proximity_monitor/dead_corpse_structure, _radius = 4, field_checker_type = src.field_checker_type)
 
 /obj/structure/decorative_structures/corpse/Destroy()
 	playsound(src, 'sound/goonstation/effects/gib.ogg', 30, 0)
@@ -361,6 +363,15 @@
 /datum/component/proximity_monitor/dead_corpse_structure
 	field_checker_type = /obj/effect/abstract/proximity_checker/dead_corpse_structure
 
+/datum/component/proximity_monitor/dead_corpse_structure/Initialize(_radius, _always_active, field_checker_type)
+	if(!ispath(field_checker_type, /obj/effect/abstract/proximity_checker/dead_corpse_structure))
+		return COMPONENT_INCOMPATIBLE
+	src.field_checker_type = field_checker_type
+	. = ..()
+
+/obj/effect/abstract/proximity_checker/dead_corpse_structure
+	var/virus_type = /datum/disease/virus/cadaver
+
 /obj/effect/abstract/proximity_checker/dead_corpse_structure/Crossed(atom/movable/AM, oldloc)
 	. = ..()
 	if(!ishuman(AM))
@@ -379,6 +390,9 @@
 	if(prob(1))
 		var/datum/disease/virus/D = new virus_type()
 		D.Contract(cross_human, CONTACT|AIRBORNE, need_protection_check = TRUE)
+
+/obj/effect/abstract/proximity_checker/dead_corpse_structure/cadaver
+	virus_type = /datum/disease/virus/cadaver
 
 ///// jumping meat for body explotion effect
 
