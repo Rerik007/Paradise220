@@ -324,6 +324,7 @@
 	density = 0
 	max_integrity = 5
 	var/bloodtiles = 8  // number of tiles with blood while pulling
+	var/virus_type = /datum/disease/virus/cadaver // virus for dead_corpse_structure/Crossed
 
 /obj/structure/decorative_structures/corpse/Initialize()
 	. = ..()
@@ -376,7 +377,7 @@
 		return
 
 	if(prob(1))
-		var/datum/disease/virus/cadaver/D = new()
+		var/datum/disease/virus/D = new virus_type()
 		D.Contract(cross_human, CONTACT|AIRBORNE, need_protection_check = TRUE)
 
 ///// jumping meat for body explotion effect

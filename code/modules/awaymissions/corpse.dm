@@ -887,7 +887,7 @@
 	head = null
 	uniform = /obj/item/clothing/under/syndicate/specops
 	shoes = /obj/item/clothing/shoes/combat
-	gloves = /obj/item/clothing/gloves/color/black
+	gloves = null
 	r_pocket = null
 	l_pocket = /obj/item/radio/off
 	suit = null
@@ -901,13 +901,14 @@
 	)
 
 	r_pocket = pick(
-					80; null,
-					20; /obj/item/gun/projectile/automatic/pistol/sp8
+				90; null,
+				7; /obj/item/gun/projectile/automatic/pistol/sp8{rusted_weapon = 1; malf_low_bound = 8; malf_high_bound = 15},
+				3; /obj/item/gun/projectile/automatic/pistol/sp8
 	)
 
 	l_pocket = pick(
-					70; /obj/item/radio/off,
-					30; /obj/item/ammo_box/magazine/sp8
+				85; /obj/item/radio/off,
+				15; /obj/item/ammo_box/magazine/sp8
 	)
 
 	suit = pick(
@@ -918,6 +919,11 @@
 	id = pick(
 				90; null,
 				10;/obj/item/card/id/gorky17/marine
+	)
+
+	gloves = pick(
+				60; null,
+				40; /obj/item/clothing/gloves/color/black
 	)
 
 /obj/effect/mob_spawn/human/corpse/specops/Initialize()
@@ -940,7 +946,7 @@
 
 	uniform = /obj/item/clothing/under/workingsuit
 	shoes = /obj/item/clothing/shoes/jackboots
-	gloves = /obj/item/clothing/gloves/color/latex
+	gloves = null
 	r_pocket = /obj/item/radio/off
 	mask = null
 	id = null
@@ -948,13 +954,18 @@
 /datum/outfit/corpse_hazard_worker/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	mask = pick(
-				50; /obj/item/clothing/mask/gas/transparent,
-				50; null
+				20; /obj/item/clothing/mask/gas/transparent,
+				80; null
 	)
 
 	id = pick(
 				80; null,
 				20; /obj/item/card/id/gorky17/soldier
+	)
+
+	gloves = pick(
+				70; null,
+				30; /obj/item/clothing/gloves/color/latex
 	)
 
 /obj/effect/mob_spawn/human/corpse/hazard_worker/Initialize()

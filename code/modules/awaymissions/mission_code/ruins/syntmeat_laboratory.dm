@@ -5,7 +5,6 @@
 	has_gravity = TRUE
 	there_can_be_many = TRUE
 	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
-	sound_environment = SOUND_ENVIRONMENT_STONEROOM
 	ambientsounds = list('sound/ambience/spooky/chill.ogg',\
 						'sound/ambience/spooky/angels.ogg',\
 						'sound/ambience/spooky/clank1.ogg',\
@@ -24,10 +23,23 @@
 						'sound/ambience/spooky/ugrnd_drip_6.ogg',\
 						'sound/ambience/spooky/ugrnd_drip_7.ogg')
 
-/area/ruin/space/test ////////////////////////////не забыть удалить
-	name = "Test area"
-	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
+	sound_environment = list('sound/ambience/spooky/argitoth.ogg',\
+						'sound/ambience/spooky/crystal_underground.ogg',\
+						'sound/ambience/spooky/moon_underground.ogg',\
+						'sound/ambience/spooky/horror.ogg',\
+						'sound/ambience/spooky/horror_2.ogg',\
+						'sound/ambience/spooky/horror_3.ogg',\
+						'sound/ambience/spooky/ominous_loop1.ogg',\
+						'sound/ambience/spooky/burning_terror.ogg')
+	max_ambience_cooldown = 60 SECONDS
 
+/area/ruin/space/test ////////////////////////////не забыть удалить      ////// узнать какая цифра stat является BROKEN
+	name = "Test area" /////////////////////////////////отбалансить хп и шанс отрубания у гориллы; отбалансить количество мясных зомбей и их хп/урон, скорость
+	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED //////////////////// добавить таблетку с полезным вирусом / рандомные полезные вирусы в холодос вирусологии
+												///////// создать новые консоли/переписать прок для оверлеев под мапперские скины
+		///// добавить объект "1000 и 1 андекдот"
+///////// при использовании будет выпадать случайное число от 1 до 1001 с текстом
+//////////"Вы прочитали анекдот [номер анекдота]" форс смеха/улыбки у игрокаы
 
 /area/vision_change_area/syntmeat_laboratory/main_lab
 	name = "Main laboratory"
@@ -70,6 +82,11 @@
 	icon_state = "away9"
 	has_gravity = FALSE
 	ambientsounds = list('sound/ambience/spooky/bass_ambience.ogg')
+	sound_environment = list('sound/ambience/spooky/space_loop1.ogg',\
+							'sound/ambience/spooky/space_loop2.ogg',\
+							'sound/ambience/spooky/space_loop3.ogg',\
+							'sound/ambience/spooky/space_loop4.ogg',\
+							'sound/ambience/spooky/space_loop5.ogg')
 
 /area/vision_change_area/syntmeat_laboratory/near_asteroid
 	name = "Space near the asteroid"
@@ -77,6 +94,12 @@
 	has_gravity = FALSE
 	ambientsounds = list('sound/ambience/spooky/dark_ambient_ eerie.ogg',\
 						'sound/ambience/spooky/deep_ominous_drone.ogg')
+	sound_environment = list('sound/ambience/spooky/space_loop1.ogg',\
+							'sound/ambience/spooky/space_loop2.ogg',\
+							'sound/ambience/spooky/space_loop3.ogg',\
+							'sound/ambience/spooky/space_loop4.ogg',\
+							'sound/ambience/spooky/space_loop5.ogg')
+	max_ambience_cooldown = 60 SECONDS
 
 /area/vision_change_area/syntmeat_laboratory/self_destruct
 	name = "Self destruct"
@@ -396,7 +419,6 @@
 ////////////// CHEMICALS
 ///////////////////////
 
-
 /datum/chemical_reaction/syntiflesh2
 	name = "Syntiflesh 2.0"
 	id = "syntiflesh2"
@@ -414,7 +436,7 @@
 	id = "livingflesh"
 	min_temp = 1000
 	result = null
-	required_reagents = list("mutagen" = 25, "meatocreatadone" = 25)   ////// мутаген надо нагреть до максимума
+	required_reagents = list("mutagen" = 25, "meatocreatadone" = 25)
 	result_amount = 1
 
 /datum/chemical_reaction/livingflesh/on_reaction(datum/reagents/holder, created_volume)
@@ -422,35 +444,40 @@
 	for(var/i in 1 to created_volume)
 		new /mob/living/simple_animal/hostile/living_limb_flesh(location)
 
-
 /datum/reagent/medicine/meatocreatadone
 	data = list("diseases" = null)
 	name = "Meatocreatadone"
 	id = "meatocreatadone"
 	description = "A plasma mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 265K for it to metabolise correctly."
 	reagent_state = LIQUID
-	color = "#4e0303" // rgb: 200, 165, 220
+	color = "#4e0303"
 	taste_description = "bitterness"
 	can_synth = FALSE
-	heart_rate_stop = 0
+	heart_rate_stop = 0  ////// нужно ли это логгировать?
 
 /obj/item/reagent_containers/glass/beaker/large/meatocreatadone
 	list_reagents = list("meatocreatadone" = 100)
 
+///////////////////////
+////////////// GASEOUS VIRUS
+///////////////////////
 
-/obj/effect/mustard
+/obj/effect/viral_gas
 	name = "cloud of gas"
 	icon_state = "mustard"
 	layer = ABOVE_MOB_LAYER
+	alpha = 180
+	var/virus = /datum/disease/virus/cadaver
+	var/chance_of_infection = 20
 
-/obj/effect/mustard/Initialize(mapload)
+/obj/effect/viral_gas/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/caltrop/virus, probability = 10, flags = CALTROP_BYPASS_WALKERS, virus_type = /datum/disease/virus/cadaver)
+	AddComponent(/datum/component/caltrop/virus, probability = chance_of_infection, flags = CALTROP_BYPASS_WALKERS, virus_type = virus)
 
-/obj/effect/mustard/is_cleanable()
+/obj/effect/viral_gas/is_cleanable()
 	if(!QDELETED(src))
 		return TRUE
 
-/obj/effect/mustard/water_act(volume, temperature, source, method)
+/obj/effect/viral_gas/water_act(volume, temperature, source, method)
 	. = ..()
 	qdel(src)

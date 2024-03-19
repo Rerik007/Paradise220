@@ -259,6 +259,7 @@
 	speed = -1
 	maxHealth = 60
 	health = 60
+	death_sound = 'sound/goonstation/effects/gib.ogg'
 
 	harm_intent_damage = 10
 	melee_damage_lower = 10

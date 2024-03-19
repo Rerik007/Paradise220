@@ -43,6 +43,7 @@
 /obj/structure/table/Initialize(mapload)
 	. = ..()
 	if(flipped)
+		smooth = SMOOTH_FALSE
 		update_icon(UPDATE_ICON_STATE)
 
 
