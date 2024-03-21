@@ -481,3 +481,59 @@
 /obj/effect/viral_gas/water_act(volume, temperature, source, method)
 	. = ..()
 	qdel(src)
+
+/obj/item/reagent_containers/food/pill/random_syntmeat_virus
+	spawned_disease = /datum/disease/virus/advance/syntmeat_random
+
+/datum/disease/virus/advance/syntmeat_random
+	var/static/list/random_symptoms = list(
+		/datum/symptom/voice_change,
+		/datum/symptom/mind_restoration,
+		/datum/symptom/sensory_restoration,
+		/datum/symptom/vomit/projectile,
+		/datum/symptom/shedding,
+		/datum/symptom/laugh,
+		/datum/symptom/love,
+		/datum/symptom/damage_converter,
+		/datum/symptom/oxygen,
+		/datum/symptom/painkiller,
+		/datum/symptom/epinephrine,
+		/datum/symptom/itching,
+		/datum/symptom/dizzy,
+		/datum/symptom/limb_throw,
+		/datum/symptom/bones,
+		/datum/symptom/moan,
+	)
+
+/datum/disease/virus/advance/syntmeat_random/New()
+	var/list/random_symptoms_copy = random_symptoms.Copy()
+	for(var/i in 1 to rand(4, 6))
+		var/datum/symptom/symptom_path = pick_n_take(random_symptoms_copy)
+		symptoms += new symptom_path
+	..()
+	name = capitalize(pick(GLOB.adjectives)) + " " + capitalize(pick(GLOB.nouns + GLOB.verbs))
+
+
+/obj/item/reagent_containers/food/pill/jungle_fever
+	spawned_disease = /datum/disease/virus/transformation/jungle_fever
+
+/obj/item/reagent_containers/food/pill/anxiety
+	spawned_disease = /datum/disease/virus/anxiety
+
+/obj/item/reagent_containers/food/pill/beesease
+	spawned_disease = /datum/disease/virus/beesease
+
+/obj/item/reagent_containers/food/pill/food_poisoning
+	spawned_disease = /datum/disease/food_poisoning
+
+/obj/item/reagent_containers/food/pill/vampire
+	spawned_disease = /datum/disease/vampire
+
+/obj/item/reagent_containers/food/pill/fake_gbs
+	spawned_disease = /datum/disease/virus/fake_gbs
+
+/obj/item/reagent_containers/food/pill/pierrot_throat
+	spawned_disease = /datum/disease/virus/pierrot_throat
+
+/obj/item/reagent_containers/food/pill/pre_loyalty
+	spawned_disease = /datum/disease/virus/advance/preset/pre_loyalty
