@@ -37,6 +37,7 @@
 	new rod_type(start, distant_turf, null, rod_delay, FALSE, user, flight_dist)
 
 /obj/effect/proc_holder/spell/rod_form/drake
+	name = "Fiery Race"
 	action_icon_state = "drake_rod"
 	rod_type = /obj/effect/immovablerod/wizard/drake
 	clothes_req = FALSE

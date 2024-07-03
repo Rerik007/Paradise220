@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/touch/infecting_touch
-	name = "заражающее касание"
+	name = "Infecting Touch"
 
 	base_cooldown = 60 SECONDS
 	cooldown_min = 20 SECONDS

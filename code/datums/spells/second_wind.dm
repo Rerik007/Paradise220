@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/second_wind
-	name = "Второе дыхание"
+	name = "Second Wind"
 	desc = "Creates a net between you and your nearby thralls that evenly shares all damage received."
 	gain_desc = "You have gained the ability to share damage between you and your thralls."
 	action_icon_state = "second_wind"

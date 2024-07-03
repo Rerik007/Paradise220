@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/dead_bond
-	name = "Армия мёртвых"
+	name = "Dead Bond"
 	desc = "Creates a net between you and your nearby friends that evenly shares all damage received."
 	gain_desc = "You have gained the ability to share damage between you and your friends."
 	action_icon_state = "dead_bond"

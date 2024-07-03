@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/aoe/dark_curtain
-	name = "тёмная завеса"
+	name = "Dark Curtain"
 	desc = "Extinguishes most nearby light sources."
 	clothes_req = FALSE
 	aoe_range = 5

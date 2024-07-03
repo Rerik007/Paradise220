@@ -1,6 +1,6 @@
 
 /obj/effect/proc_holder/spell/aoe/hallutination
-	name = "массовые галлюцинации"
+	name = "Mass Hallutination"
 
 	base_cooldown = 60 SECONDS
 	cooldown_min = 20 SECONDS
