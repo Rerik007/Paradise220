@@ -277,11 +277,16 @@ In my current plan for it, 'solid' will be defined as anything with density == 1
 				update_appearance(UPDATE_NAME)
 
 	if(ishuman(smeared_mob))
-		smeared_mob.adjustBruteLoss(160)
+		INVOKE_ASYNC(src, PROC_REF(special_rod_attack), smeared_mob)
 
 	if(smeared_mob.density || prob(10))
-		smeared_mob.ex_act(EXPLODE_HEAVY)
+		INVOKE_ASYNC(src, PROC_REF(ex_rod_act), smeared_mob)
 
+/obj/effect/immovablerod/proc/special_rod_attack(mob/living/carbon/human/smeared_human)
+	smeared_human.adjustBruteLoss(160)
+
+/obj/effect/immovablerod/proc/ex_rod_act(mob/living/carbon/human/smeared_human)
+	smeared_human.ex_act(EXPLODE_HEAVY)
 
 /* Below are a couple of admin helper procs when dealing with immovable rod memes. */
 /**

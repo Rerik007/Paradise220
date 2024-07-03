@@ -35,6 +35,8 @@
 
 #define STATUS_EFFECT_THRALL_NET /datum/status_effect/thrall_net
 
+#define STATUS_EFFECT_WIZARD_NET /datum/status_effect/wizard_net
+
 /// Healing effect upplied on gorillas from eating bananas.
 #define STATUS_EFFECT_BANANA_POWER /datum/status_effect/banana_power
 
@@ -181,3 +183,5 @@
 #define STATUS_EFFECT_OFFERING_ITEM /datum/status_effect/offering_item
 
 #define STATUS_EFFECT_STARING /datum/status_effect/staring //Used in ../human/examine() proc
+/// Status effect gor second wind spell, gives immune to stuns
+#define STATUS_EFFECT_SECOND_WIND /datum/status_effect/second_wind

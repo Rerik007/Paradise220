@@ -147,6 +147,12 @@
 	spell_type = /obj/effect/proc_holder/spell/genetic/mutate
 	category = "Offensive"
 
+/datum/spellbook_entry/honk_mutate
+	name = "Honk Mutate"
+	spell_type = /obj/effect/proc_holder/spell/genetic/mutate/honk
+	category = "Offensive"
+	cost = 2
+
 /datum/spellbook_entry/rod_form
 	name = "Rod Form"
 	spell_type = /obj/effect/proc_holder/spell/rod_form
@@ -310,6 +316,55 @@
 	spell_type = /obj/effect/proc_holder/spell/summonitem
 	category = "Assistance"
 	cost = 1
+
+/datum/spellbook_entry/dead_bond
+	name = "армия мёртвых"
+	spell_type = /obj/effect/proc_holder/spell/dead_bond
+	category = "Assistance"
+	cost = 1
+
+/datum/spellbook_entry/drake_rod
+	name = "огненный скачок"
+	spell_type = /obj/effect/proc_holder/spell/rod_form/drake
+	category = "Assistance"
+	cost = 2
+
+/datum/spellbook_entry/m_hallutination
+	name = "массовые галлюцинации"
+	spell_type = /obj/effect/proc_holder/spell/aoe/hallutination
+	category = "Assistance"
+	cost = 1
+
+/datum/spellbook_entry/infecting_touch
+	name = "заражающее касание"
+	spell_type = /obj/effect/proc_holder/spell/touch/infecting_touch
+	category = "Assistance"
+	cost = 1
+
+/datum/spellbook_entry/second_wind
+	name = "второе дыхание"
+	spell_type = /obj/effect/proc_holder/spell/second_wind
+	category = "Assistance"
+	cost = 1
+
+/datum/spellbook_entry/substitution
+	name = "подмена в космосе"
+	spell_type = /obj/effect/proc_holder/spell/substitution
+	category = "Assistance"
+	cost = 2
+
+/datum/spellbook_entry/ns_veil
+	name = "тёмная завеса"
+	spell_type = /obj/effect/proc_holder/spell/aoe/dark_curtain
+	category = "Assistance"
+	cost = 1
+
+/datum/spellbook_entry/health_sharing
+	name = "обмен здоровьем"
+	spell_type = /obj/effect/proc_holder/spell/health_sharing
+	category = "Assistance"
+	cost = 1
+
 
 /datum/spellbook_entry/noclothes
 	name = "Remove Clothes Requirement"
@@ -674,6 +729,7 @@
 	desc = "A magical contract binding an apprentice wizard to your service, using it will summon them to your side."
 	item_path = /obj/item/contract/apprentice
 	category = "Summons"
+	limit = 2
 
 /datum/spellbook_entry/item/tarotdeck
 	name = "Guardian Deck"

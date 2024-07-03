@@ -17,6 +17,8 @@
 	var/rod_max_distance = BASE_WIZ_ROD_RANGE
 	/// Rod speed
 	var/rod_delay = 2
+	/// Rod type
+	var/rod_type = /obj/effect/immovablerod/wizard
 
 
 /obj/effect/proc_holder/spell/rod_form/create_new_targeting()
@@ -32,7 +34,16 @@
 
 	var/flight_dist = rod_max_distance + spell_level * 3
 	var/turf/distant_turf = get_ranged_target_turf(start, user.dir, flight_dist)
-	new /obj/effect/immovablerod/wizard(start, distant_turf, null, rod_delay, FALSE, user, flight_dist)
+	new rod_type(start, distant_turf, null, rod_delay, FALSE, user, flight_dist)
+
+/obj/effect/proc_holder/spell/rod_form/drake
+	action_icon_state = "drake_rod"
+	rod_type = /obj/effect/immovablerod/wizard/drake
+	clothes_req = FALSE
+	human_req = TRUE
+	base_cooldown = 30 SECONDS
+	rod_delay = 1
+	rod_max_distance = 6
 
 
 /**
@@ -102,6 +113,18 @@
 	wizard.forceMove(get_turf(src))
 	wizard = null
 
+/obj/effect/immovablerod/wizard/drake
+	icon = 'icons/mob/lavaland/64x64megafauna.dmi'
+	icon_state = "dragon"
+	max_distance = 6
+
+/obj/effect/immovablerod/wizard/drake/special_rod_attack(mob/living/carbon/human/smeared_human)
+	smeared_human.adjustFireLoss(30)
+	smeared_human.adjust_fire_stacks(3)
+	smeared_human.IgniteMob()
+
+/obj/effect/immovablerod/wizard/drake/ex_rod_act(mob/living/carbon/human/smeared_human)
+	return
 
 #undef BASE_WIZ_ROD_RANGE
 

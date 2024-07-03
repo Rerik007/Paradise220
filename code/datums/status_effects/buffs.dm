@@ -561,6 +561,57 @@
 	. = ..()
 	vamp = null
 
+/datum/status_effect/wizard_net
+	id = "wizard_net"
+	tick_interval = 2 SECONDS
+	duration = 60 SECONDS
+	alert_type = null
+	var/list/target_UIDs = list()
+
+
+/datum/status_effect/wizard_net/on_creation(mob/living/new_owner, ...)
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
+	target_UIDs += owner.UID()
+	for(var/mob/living/living_viewer in view(7, owner))
+		if(!("wizard" in living_viewer.faction))
+			continue
+
+		if(living_viewer.stat == DEAD)
+			continue
+
+		target_UIDs += living_viewer.UID()
+		living_viewer.Beam(owner, "sendbeam", time = 2 SECONDS, maxdistance = 7)
+
+
+/datum/status_effect/wizard_net/tick(seconds_between_ticks)
+	var/total_damage = 0
+	var/list/view_cache = view(7, owner)
+	for(var/uid in target_UIDs)
+		var/mob/living/living_wizard = locateUID(uid)
+		if(!(living_wizard in view_cache) || living_wizard.stat == DEAD)
+			target_UIDs -= uid
+			continue
+		total_damage += (living_wizard.maxHealth - living_wizard.health)
+		living_wizard.Beam(owner, "sendbeam", time = 2 SECONDS, maxdistance = 7)
+
+	var/average_damage = total_damage / length(target_UIDs)
+
+	for(var/uid in target_UIDs)
+		var/mob/living/living_wizard = locateUID(uid)
+		var/current_damage = living_wizard.maxHealth - living_wizard.health
+		if(current_damage == average_damage)
+			continue
+		if(current_damage > average_damage)
+			var/heal_amount = current_damage - average_damage
+			living_wizard.heal_ordered_damage(heal_amount, list(BRUTE, BURN, TOX, OXY, CLONE))
+		else
+			var/damage_amount = average_damage - current_damage
+			living_wizard.adjustFireLoss(damage_amount)
+
+	if(length(target_UIDs) <= 1) // if there is one left in the list, its only the wizard.
+		qdel(src)
+
 
 /datum/status_effect/bloodswell
 	id = "bloodswell"
@@ -730,3 +781,19 @@
 /datum/status_effect/drill_payback/on_remove()
 	..()
 	owner.clear_fullscreen("payback")
+
+/datum/status_effect/second_wind
+	duration = 10 SECONDS
+	id = "second_wind"
+	tick_interval = 2 SECONDS
+
+/datum/status_effect/second_wind/on_apply()
+	owner.add_status_effect_absorption(source = id, effect_type = list(STUN, WEAKEN, STAMCRIT, PARALYZE, KNOCKDOWN))
+	return TRUE
+
+/datum/status_effect/second_wind/tick(seconds_between_ticks)
+	owner.setStaminaLoss(0, TRUE)
+
+/datum/status_effect/second_wind/on_remove()
+	..()
+	owner.remove_status_effect_absorption(source = id, effect_type = list(STUN, WEAKEN, STAMCRIT, PARALYZE, KNOCKDOWN))

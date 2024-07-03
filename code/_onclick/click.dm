@@ -414,7 +414,10 @@
 	changeNext_move(CLICK_CD_RANGE)
 	var/turf/T = get_turf(src)
 	var/turf/U = get_turf(A)
-
+	if(CLUMSY in mutations)
+		var/obj/item/grown/bananapeel/traitorpeel/peel = new(T)
+		peel.throw_at(U, 8, 2)
+		return
 	var/obj/item/projectile/beam/LE = new /obj/item/projectile/beam(loc)
 	LE.icon = 'icons/effects/genetics.dmi'
 	LE.icon_state = "eyelasers"

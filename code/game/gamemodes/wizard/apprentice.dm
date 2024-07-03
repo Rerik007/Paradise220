@@ -181,20 +181,19 @@
 
 /datum/possible_schools
 	var/list/datum/schools_list = list (
-		new /datum/magick_school.fire,
-		new /datum/magick_school.healer,
-		new /datum/magick_school.motion,
-		new /datum/magick_school.defense,
-		new /datum/magick_school.stand,
-		new /datum/magick_school.sabotage,
-		new /datum/magick_school.sculpt,
-		new /datum/magick_school.instability,
-		new /datum/magick_school.vision,
-		new /datum/magick_school.replace,
-		new /datum/magick_school.destruction,
-		new /datum/magick_school.singulo,
-		new /datum/magick_school.blood,
-		new /datum/magick_school.necromantic,
+		new /datum/magick_school/fire,
+		new /datum/magick_school/healer,
+		new /datum/magick_school/motion,
+		new /datum/magick_school/defense,
+		new /datum/magick_school/stand,
+		new /datum/magick_school/sabotage,
+		new /datum/magick_school/sculpt,
+		new /datum/magick_school/instability,
+		new /datum/magick_school/vision,
+		new /datum/magick_school/replace,
+		new /datum/magick_school/destruction,
+		new /datum/magick_school/singulo,
+		new /datum/magick_school/necromantic,
 		new /datum/magick_school/lavaland,
 	)
 
@@ -218,6 +217,9 @@
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/charge(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/summonitem(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/forcewall(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/hallutination(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/touch/infecting_touch(null))
+
 	owner.equip_or_collect(new /obj/item/gun/magic/staff/healing(owner), ITEM_SLOT_HAND_RIGHT)
 
 	owner.equip_or_collect(new /obj/item/clothing/suit/wizrobe/healmage(owner), ITEM_SLOT_CLOTH_OUTER)
@@ -308,8 +310,8 @@
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/forcewall(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/forcewall/greater(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/repulse(null))
-	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/sacred_flame(null))
-	ADD_TRAIT(owner, RESISTHOT, MAGIC_TRAIT)	//sacred_flame из-за не совсем верной выдачи, без этого, не выдает защиту от огня.
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/emplosion/disable_tech(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/health_sharing(null))
 
 	owner.equip_or_collect(new /obj/item/clothing/suit/wizrobe/magusdefender(owner), ITEM_SLOT_CLOTH_OUTER)
 	owner.equip_or_collect(new /obj/item/clothing/head/wizard/magusdefender(owner), ITEM_SLOT_HEAD)
@@ -324,6 +326,7 @@
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/smoke(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/fireball(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/sacred_flame(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/rod_form/drake(null))
 	ADD_TRAIT(owner, RESISTHOT, MAGIC_TRAIT)
 	owner.equip_or_collect(new /obj/item/clothing/suit/victcoat/red/suit/fire_robe, ITEM_SLOT_CLOTH_OUTER)
 
@@ -357,6 +360,7 @@
 
 /datum/magick_school/stand/kit()
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/forcewall/greater(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/conjure/timestop(null))
 	owner.equip_or_collect(new /obj/item/guardiancreator(owner), ITEM_SLOT_HAND_RIGHT)
 
 	owner.equip_or_collect(new /obj/item/clothing/suit/wizrobe/magusdefender(owner), ITEM_SLOT_CLOTH_OUTER)
@@ -370,50 +374,32 @@
 /datum/magick_school/instability/kit()
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/summonitem(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/repulse(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/touch/banana(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/genetic/mutate/honk(null))
 	owner.equip_or_collect(new /obj/item/gun/magic/staff/slipping(owner), ITEM_SLOT_HAND_RIGHT)
-	owner.equip_or_collect(new /obj/item/bikehorn, ITEM_SLOT_BELT)
-
-
-/datum/magick_school/blood
-	name = "Школа Крови"
-	id = "blood"
-	desc = "Запретная школа, вызывающая опасения у архимагов, но допущенная к изучению. Юный последователь крови получает собственную робу, цепь и камни душ."
-
-/datum/magick_school/blood/kit()
-	owner.equip_or_collect(new /obj/item/storage/belt/soulstone/full(owner), ITEM_SLOT_BELT)
-	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/conjure/construct(null))
-
-	var/obj/item/melee/chainofcommand/chain = new
-	chain.name = "Жертвенная Цепь"
-	chain.desc = "Цепь последователя школы крови для нанесения увечий и пускания крови."
-	chain.force = 15
-	owner.equip_or_collect(chain, ITEM_SLOT_HAND_RIGHT)
-	owner.equip_or_collect(new /obj/item/clothing/suit/hooded/cultrobes/suit/sacrificial_robe, ITEM_SLOT_CLOTH_OUTER)
-
-/obj/item/clothing/suit/hooded/cultrobes/suit/sacrificial_robe
-	name = "Жертвенная роба"
-	desc = "Магическая роба последователей школы крови."
-	gas_transfer_coefficient = 0.01
-	permeability_coefficient = 0.01
-	armor = list("melee" = 30, "bullet" = 20, "laser" = 20, "energy" = 30, "bomb" = 20, "bio" = 20, "rad" = 20, "fire" = 100, "acid" = 100)
-	strip_delay = 5 SECONDS
-	put_on_delay = 5 SECONDS
-	magical = TRUE
-	resistance_flags = FIRE_PROOF | ACID_PROOF
+	owner.equip_or_collect(new /obj/item/bikehorn/golden, ITEM_SLOT_BELT)
 
 /datum/magick_school/necromantic
-	name = "Школа Некромантии"
+	name = "Школа Некромагии"
 	id = "necro"
 	desc = "Запретная школа, заставляющая мертвых служить некроманту, заключившему контракт души."
 
 /datum/magick_school/necromantic/kit()
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/lichdom(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/dead_bond(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/conjure/construct(null))
+
+	owner.equip_or_collect(new /obj/item/melee/chainofcommand/necro_chain, ITEM_SLOT_HAND_RIGHT)
+	owner.equip_or_collect(new /obj/item/storage/belt/soulstone/full(owner), ITEM_SLOT_BELT)
 	owner.equip_or_collect(new /obj/item/necromantic_stone(owner), ITEM_SLOT_POCKET_LEFT)
-	owner.equip_or_collect(new /obj/item/necromantic_stone(owner), ITEM_SLOT_POCKET_RIGHT)
 
 	owner.equip_or_collect(new /obj/item/clothing/suit/wizrobe/necromage(owner), ITEM_SLOT_CLOTH_OUTER)
 	owner.equip_or_collect(new /obj/item/clothing/head/wizard/necromage(owner), ITEM_SLOT_HEAD)
 
+/obj/item/melee/chainofcommand/necro_chain
+	name = "Жертвенная Цепь"
+	desc = "Цепь последователя школы крови для нанесения увечий и пускания крови."
+	force = 15
 
 /datum/magick_school/vision
 	name = "Школа Прозрения"
@@ -422,6 +408,7 @@
 
 /datum/magick_school/vision/kit()
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/trigger/blind(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/dark_curtain(null))
 	owner.equip_or_collect(new /obj/item/scrying(owner), ITEM_SLOT_HAND_RIGHT)
 	//Выдаем трейты ОРБа
 	if(!(XRAY in owner.mutations))
@@ -443,6 +430,7 @@
 /datum/magick_school/singulo/kit()
 	owner.equip_or_collect(new /obj/item/twohanded/singularityhammer(owner), ITEM_SLOT_HAND_RIGHT)
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/repulse(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/second_wind(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/summonitem(null))
 
 	//Всё тот же костюм мага воителя, но с спрайтом сингулярного рыцаря.
@@ -470,6 +458,7 @@
 /datum/magick_school/replace/kit()		//старый набор
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe/knock(null))
 	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/mind_transfer(null))
+	owner.mind.AddSpell(new /obj/effect/proc_holder/spell/substitution(null))
 
 	//Нацепляем простой фиолетовый балахон
 	owner.equip_or_collect(new /obj/item/clothing/suit/wizrobe/psypurple(owner), ITEM_SLOT_CLOTH_OUTER)

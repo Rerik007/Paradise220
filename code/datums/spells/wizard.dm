@@ -120,6 +120,21 @@
 /obj/effect/proc_holder/spell/genetic/mutate/create_new_targeting()
 	return new /datum/spell_targeting/self
 
+/obj/effect/proc_holder/spell/genetic/mutate/honk
+	name = "HONK Mutate"
+	desc = "This spell causes you to turn into a hulk and gain laser vision for a short while."
+
+	school = "transmutation"
+	base_cooldown = 40 SECONDS
+	cooldown_min = 30 SECONDS //25 deciseconds reduction per rank
+	invocation = "HONK HONKUAD"
+	action_icon_state = "honk_mutate"
+	sound = 'sound/machines/honkbot_evil_laugh.ogg'
+
+/obj/effect/proc_holder/spell/genetic/mutate/honk/Initialize(mapload)
+	. = ..()
+	mutations = list(GLOB.hulkblock, GLOB.clumsyblock)
+
 
 /obj/effect/proc_holder/spell/smoke
 	name = "Smoke"
